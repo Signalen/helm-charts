@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "signals-api.celery-worker" . }}
+  labels:
+    {{- include "signals-api.labels" . | nindent 4 }}
+    component: cellery-worker
+spec:
+  replicas: {{ .Values.celery.worker.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "signals-api.selectorLabels" . | nindent 6 }}
+      component: celery-worker
+  template:
+    metadata:
+      labels:
+        {{- include "signals-api.labels" . | nindent 8 }}
+        component: celery-worker
+    spec:
+      containers:
+        - name: celery-worker
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/usr/local/bin/celery"]
+          args: ["worker", "--app", "signals", "--loglevel", "WARNING"]
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: signals.settings.production
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: secret-key
+
+            - name: DATABASE_HOST_OVERRIDE
+              value: {{ .Values.database.hostname }}
+            - name: DATABASE_PORT_OVERRIDE
+              value: "5432"
+            - name: DATABASE_NAME
+              value: {{ .Values.database.databaseName }}
+            - name: DATABASE_USER
+              value: {{ .Values.database.username }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: database-password
+
+            - name: RABBITMQ_HOST
+              value: {{ .Values.celery.rabbitmq.hostname }}
+            - name: RABBITMQ_VHOST
+              value: ""
+            - name: RABBITMQ_USER
+              value: {{ .Values.celery.rabbitmq.username }}
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: rabbitmq-password
+
+            - name: EMAIL_HOST
+              value: {{ .Values.smtp.hostname }}
+            - name: EMAIL_PORT
+              value: {{ .Values.smtp.port | quote }}
+            - name: EMAIL_HOST_USER
+              value: {{ .Values.smtp.username }}
+            - name: EMAIL_HOST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: smtp-password
+            - name: EMAIL_USE_TLS
+              value: {{ .Values.smtp.useTLS | quote }}
+            - name: EMAIL_USE_SSL
+              value: {{ .Values.smtp.useSSL | quote }}
+
+            - name: EMAIL_FLEX_HORECA_INTEGRATION_ADDRESS
+              value: {{ .Values.emailAddresses.flexHoreca }}
+            - name: EMAIL_TOEZICHT_OR_NIEUW_WEST_INTEGRATION_ADDRESS
+              value: {{ .Values.emailAddresses.toezichtNieuwWest }}
+            - name: EMAIL_VTH_NIEUW_WEST_INTEGRATION_ADDRESS
+              value: {{ .Values.emailAddresses.vthNieuwWest }}
+
+            {{- if .Values.sigmax.enabled }}
+            - name: SIGMAX_SERVER
+              value: {{ .Values.sigmax.serverUrl }}
+            - name: SIGMAX_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}-sigmax
+                  key: auth-token
+            {{- end }}

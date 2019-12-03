@@ -1,0 +1,82 @@
+tags:
+  postgresql: true
+  rabbitmq: true
+
+replicaCount: 1
+
+image:
+  repository: registry.gitlab.com/commonground/signals/signals/api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  class: traefik
+  host: api.signals.local
+
+persistence:
+  size: 1Gi
+
+database:
+  hostname: signals-api-postgresql
+  databaseName: signals
+  username: signals
+  password: signals
+
+celery:
+  worker:
+    replicaCount: 1
+  rabbitmq:
+    hostname: signals-api-rabbitmq
+    username: signals
+    password: signals
+
+smtp:
+  hostname: mailhog
+  port: 25
+  username: ""
+  password: ""
+  useTLS: false
+  useSSL: false
+
+datapuntApiUrl: https://api.data.amsterdam.nl/
+
+emailAddresses:
+  flexHoreca: flex-horeca@signals.local
+  toezichtNieuwWest: toezicht-nieuw-west@signals.local
+  vthNieuwWest: vth-nieuw-west@signals.local
+
+sigmax:
+  enabled: false
+  serverUrl: http://sigmax.sigmax
+  authToken: insecure
+
+#######################
+## RabbitMQ subchart ##
+#######################
+rabbitmq:
+  image:
+    tag: "3.8"
+  rabbitmq:
+    username: signals
+    password: signals
+  persistence:
+    size: 1Gi
+
+#########################
+## PostgreSQL subchart ##
+#########################
+postgresql:
+  image:
+    repository: amsterdam/postgres11
+    tag: latest
+
+  persistence:
+    size: 1Gi
+
+  postgresqlDatabase: signals
+  postgresqlUsername: signals
+  postgresqlPassword: signals

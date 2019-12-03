@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "authz-admin.fullname" . }}
+  labels:
+    {{- include "authz-admin.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    authz_admin:
+      api_key: ${API_KEY}
+      jwks: ${JWK_SET}
+      bind_port: 8080
+
+      required_accounts:
+        admin@signals.local:
+          - SIG_ROLE
+
+      datasets:
+        SIG:
+          name: Meldingen
+          scopes:
+            ALL:
+              name: Volledig
+
+      profiles:
+        SIGGUY:
+          name: Meldingenguy
+          description: You know
+          scopes:
+            - SIG/ALL
+
+      roles:
+        SIG_ROLE:
+          name: Signal guy
+          description: You know
+          profiles:
+            - SIGGUY
+
+    postgres:
+      host: ${DB_HOST}
+      port: 5432
+      dbname: ${DB_NAME}
+      user: ${DB_USER}
+      password: ${DB_PASSWORD}
+
+    logging:
+      version: 1
+      formatters:
+        default:
+          format: '%(asctime)s authz_admin %(levelname)-8s %(module)s:%(lineno)d: %(message)s'
+      handlers:
+        console:
+          class: logging.StreamHandler
+          formatter: default
+        aiohttp.access:
+          class: logging.StreamHandler
+      loggers:
+        authz_admin:
+          level: ${LOGLEVEL:-DEBUG}
+          handlers: [console]
+          propagate: false
+        aiohttp.access:
+          level: ${LOGLEVEL:-DEBUG}
+          handlers: [aiohttp.access]
+          propagate: false
+        aiohttp:
+          propagate: true
+        rest_utils:
+          level: ${LOGLEVEL:-DEBUG}
+          handlers: [console]
+          propagate: false
+        config_loader:
+          level: ${LOGLEVEL:-DEBUG}
+          handlers: [console]
+          propagate: false
+      root:
+        level: ${LOGLEVEL:-WARNING}
+        handlers: [console]

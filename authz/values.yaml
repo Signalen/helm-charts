@@ -1,0 +1,51 @@
+replicaCount: 1
+
+image:
+  repository: registry.gitlab.com/commonground/signals/authz
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  class: traefik
+  host: auth.signals.local
+
+accessToken:
+  lifetime: 36000
+  jwkSet: |-
+    {
+      "keys": [
+        {
+          "kty": "EC",
+          "key_ops": [
+            "sign"
+          ],
+          "kid": "2aedafba-8170-4064-b704-ce92b7c89cc6",
+          "crv": "P-256",
+          "x": "6r8PYwqfZbq_QzoMA4tzJJsYUIIXdeyPA27qTgEJCDw=",
+          "y": "Cf2clfAfFuuCB06NMfIat9ultkMyrMQO9Hd2H7O9ZVE=",
+          "d": "N1vu0UQUp0vLfaNeM0EDbl4quvvL6m_ltjoAXXzkI3U="
+        }
+      ]
+    }
+
+roles:
+  accountsUrl: http://authz-admin/authz_admin/accounts/
+  apiKey: rNkPci1dkNWCS0Brqpq3
+
+authorization:
+  baseUrl: http://authz-admin/authz_admin/
+  updateInterval: 600
+
+idp:
+  baseUrl: https:/idp.signals.local/idp/login
+  secret: aMCc9kXFSimVaLFxIb83
+
+clients:
+  - name: sia
+    grantType: token
+    redirects:
+      - https://frontend.signals.local/manage/incidents

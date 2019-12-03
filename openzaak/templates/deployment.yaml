@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "openzaak.fullname" . }}
+  labels:
+    {{- include "openzaak.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "openzaak.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "openzaak.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: openzaak
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+              httpHeaders:
+                - name: Host
+                  value: localhost
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+              httpHeaders:
+                - name: Host
+                  value: localhost
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8000
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: openzaak.conf.docker
+            - name: DJANGO_LOG_LEVEL
+              value: DEBUG
+            - name: ALLOWED_HOSTS
+              value: "localhost,{{ .Values.ingress.host }}"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "openzaak.fullname" . }}
+                  key: secret-key
+
+            - name: DB_HOST
+              value: {{ .Values.database.hostname }}
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: {{ .Values.database.databaseName }}
+            - name: DB_USER
+              value: {{ .Values.database.username }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "openzaak.fullname" . }}
+                  key: redis-password
+
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "openzaak.fullname" . }}
+                  key: redis-password
+
+            - name: CACHE_DEFAULT
+              value: {{ template "openzaak.cacheUrl" . }}
+            - name: CACHE_AXES
+              value: {{ template "openzaak.cacheUrl" . }}

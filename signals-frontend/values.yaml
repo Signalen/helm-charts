@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: registry.gitlab.com/commonground/signals/signals-frontend
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  class: traefik
+  host: frontend.signals.local
+
+urls:
+  apiRootUrl: https://api.signals.local/
+  authRootUrl: https://auth.signals.local/
+  apiRootMlToolUrl: https://api.signals.local/
+  apiRootMapServerUrl: https://map.data.amsterdam.nl/

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "authz.fullname" . }}
+  labels:
+    {{- include "authz.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "authz.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "authz.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: authz
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["-config", "/etc/authz/config.toml"]
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/authz/config.toml
+              subPath: config.toml
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "authz.fullname" . }}
+            items:
+              - key: config.toml
+                path: config.toml

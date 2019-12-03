@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: mailhog/mailhog
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port:
+    smtp: 25
+    http: 80
+
+ingress:
+  class: traefik
+  host: mailhog.signals.local
