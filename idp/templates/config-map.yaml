@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "idp.fullname" . }}
+  labels:
+    {{- include "idp.labels" . | nindent 4 }}
+data:
+  config.yaml: |
+    app:
+      host: localhost
+      port: 8080
+      root: ""
+
+    callbacks:
+    {{ .Values.callbacks | toYaml | indent 2 }}
+
+    jwt:
+      algorithm: HS256
+      secret: ${JWT_REFRESH_SECRET}
+      lifetime: {{ .Values.jwt.lifetime }}
+
+    postgres:
+      host: ${DB_HOST}
+      port: 5432
+      user: ${DB_USER}
+      password: ${DB_PASSWORD}
+      dbname: ${DB_NAME}
+
+    logging:
+      version: 1
+      formatters:
+        root:
+          format: "%(asctime)s	%(name)s %(levelname)s (%(pathname)s/%(filename)s:%(funcName)s@%(lineno)d): %(message)s"
+        auditlog:
+          format: "%(asctime)s	%(name)s %(levelname)s (pid: %(process)d | ts: %(created)f) %(message)s"
+      handlers:
+        local-root:
+          class: logging.StreamHandler
+          formatter: root
+        local-auditlog:
+          class: logging.StreamHandler
+          formatter: auditlog
+        gelf-root:
+          class : graypy.GELFUDPHandler
+          formatter: root
+          host: ${LOGSTASH_HOST:-localhost}
+          port: ${LOGSTASH_GELF_UDP_PORT:-12201}
+        gelf-auditlog:
+          class : graypy.GELFUDPHandler
+          formatter: auditlog
+          host: ${LOGSTASH_HOST:-localhost}
+          port: ${LOGSTASH_UDP_PORT:-12201}
+      loggers:
+        authserver:
+          level: ${LOGLEVEL:-DEBUG}
+          propagate: false
+          handlers:
+            - local-root
+            - gelf-root
+        auditlog.authserver:
+          level: DEBUG
+          propagate: false
+          handlers:
+            - local-auditlog
+            - gelf-auditlog
+      root:
+        level: ${LOGLEVEL:-DEBUG}
+        handlers:
+          - local-root
+          - gelf-root
+
+  migrate.py: |
+    import os
+    import psycopg2
+
+    connection = psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        database=os.getenv("DB_NAME"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"))
+
+    cursor = connection.cursor()
+    with open(os.getenv("DB_SQL_FILE"), "r") as f:
+      cursor.execute(f.read())
+      cursor.close()
+
+    connection.commit()
+    connection.close()
+  users.sql: |
+    CREATE TABLE IF NOT EXISTS users (email character varying(254) PRIMARY KEY, password character varying(128));
+
+    {{ if .Values.createDemoAccount}}
+    INSERT INTO users (email, password) VALUES ('{{ .Values.demoAccount.emailAddress }}', '{{ .Values.demoAccount.passwordHash }}')
+    ON CONFLICT DO NOTHING;
+    {{ end }}

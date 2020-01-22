@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "openzaak.fullname" . }}
+  labels:
+    {{- include "openzaak.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "openzaak.labels" . | nindent 4 }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: http

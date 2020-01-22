@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "signals-api.migrate" . }}
+  labels:
+    {{- include "signals-api.labels" . | nindent 4 }}
+spec:
+  backoffLimit: 6
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: manage-migrate
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/app/manage.py"]
+          args: ["migrate"]
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: secret-key
+            - name: DATABASE_HOST_OVERRIDE
+              value: {{ .Values.database.hostname }}
+            - name: DATABASE_PORT_OVERRIDE
+              value: "5432"
+            - name: DATABASE_NAME
+              value: {{ .Values.database.databaseName }}
+            - name: DATABASE_USER
+              value: {{ .Values.database.username }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "signals-api.fullname" . }}
+                  key: database-password

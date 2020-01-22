@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "signals-frontend.fullname" . }}
+  labels:
+    {{- include "signals-frontend.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "signals-frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "signals-frontend.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: nginx
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: ROOT
+              value: https://{{ .Values.ingress.host }}/
+            - name: API_ROOT
+              value: {{ .Values.urls.apiRootUrl }}
+            - name: AUTH_ROOT
+              value: {{ .Values.urls.authRootUrl }}
+            - name: API_ROOT_MLTOOL
+              value: {{ .Values.urls.apiRootMlToolUrl }}
+            - name: API_ROOT_MAPSERVER
+              value: {{ .Values.urls.apiRootMapServerUrl }}

@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "idp.fullname" . }}
+  labels:
+    {{- include "idp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "idp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "idp.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: idp
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            httpGet:
+              path: /idp/static/favicon.png
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /idp/static/favicon.png
+              port: http
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: /etc/idp/config.yaml
+              subPath: config.yaml
+          env:
+            - name: CONFIG
+              value: /etc/idp/config.yaml
+            - name: JWT_REFRESH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "idp.fullname" . }}
+                  key: jwt-refresh-secret
+
+            - name: DB_HOST
+              value: {{ template "idp.postgresql" . }}
+            - name: DB_NAME
+              value: {{ .Values.postgresql.postgresqlDatabase }}
+            - name: DB_USER
+              value: {{ .Values.postgresql.postgresqlUsername }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "idp.fullname" . }}
+                  key: postgresql-password
+
+            - name: UWSGI_HTTP
+              value: 0.0.0.0:8080
+            - name: UWSGI_MODULE
+              value: auth.server
+            - name: UWSGI_CALLABLE
+              value: app
+            - name: UWSGI_MASTER
+              value: "1"
+            - name: UWSGI_PROCESSES
+              value: "4"
+            - name: UWSGI_LAZY_APPS
+              value: "1"
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "idp.fullname" . }}
+            items:
+              - key: config.yaml
+                path: config.yaml

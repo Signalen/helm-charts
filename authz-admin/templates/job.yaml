@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "authz-admin.fullname" . }}-alembic
+  labels:
+    {{- include "authz-admin.labels" . | nindent 4 }}
+spec:
+  backoffLimit: 6
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: alembic
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/usr/local/bin/alembic"]
+          args: ["upgrade", "head"]
+          workingDir: /app/alembic
+          env:
+            - name: DB_HOST
+              value: {{ template "authz-admin.postgresql" . }}
+            - name: DB_NAME
+              value: {{ .Values.postgresql.postgresqlDatabase }}
+            - name: DB_USER
+              value: {{ .Values.postgresql.postgresqlUsername }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "authz-admin.fullname" . }}
+                  key: postgresql-password

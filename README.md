@@ -1,2 +1,1 @@
-# Signals Helm chart
-
+# Signals Helm charts

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: authz-admin
+description:
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: postgresql
+    version: ~7.7.2
+    repository: https://kubernetes-charts.storage.googleapis.com
+    tags:
+      - postgresql

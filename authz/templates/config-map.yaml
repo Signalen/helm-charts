@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "authz.fullname" . }}
+  labels:
+    {{- include "authz.labels" . | nindent 4 }}
+data:
+  config.toml: |
+    bind-host = "0.0.0.0"
+    bind-port = 8080
+    base-url = "https://{{ .Values.ingress.host }}/"
+
+    [accesstoken]
+    jwk-set = """
+      {{ .Values.accessToken.jwkSet | indent 6 }}
+    """
+
+    ## Lifetime of access tokens
+    lifetime = {{ .Values.accessToken.lifetime  }}
+
+    ## Identifier of the token issuer (e.g. URI of authorizatuon endpoint)
+    issuer = "https://{{ .Values.ingress.host }}/oauth2"
+
+    [roles]
+    accounts-url = {{ .Values.roles.accountsUrl | quote }}
+    api-key = {{ .Values.roles.apiKey | quote }}
+
+    [authorization]
+    base-url = {{ .Values.authorization.baseUrl | quote }}
+    update-interval = {{ .Values.authorization.updateInterval }}
+
+    [idp-datapunt]
+    base-url = {{ .Values.idp.baseUrl | quote }}
+    secret = {{ .Values.idp.secret | quote }}
+
+    [clients]
+    {{- range .Values.clients }}
+    [clients.{{ .name }}]
+    granttype = {{ .grantType | quote }}
+    redirects = [
+    {{- range .redirects }}
+      {{ . | quote }},
+    ]
+    {{- end }}
+    {{- end }}
