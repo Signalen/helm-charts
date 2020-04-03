@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: registry.gitlab.com/commonground/signals/signals-frontend
+  repository: registry.gitlab.com/commonground/signals/frontend
   tag: latest
   pullPolicy: IfNotPresent
 
