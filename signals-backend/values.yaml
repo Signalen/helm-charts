@@ -20,7 +20,9 @@ ingress:
   host: api.signals.local
 
 persistence:
+  enabled: true
   size: 1Gi
+  existingClaim: null
 
 database:
   hostname: signals-backend-postgresql
@@ -62,11 +64,15 @@ sigmax:
 rabbitmq:
   image:
     tag: "3.8"
+
   rabbitmq:
     username: signals
     password: signals
+
   persistence:
+    enabled: true
     size: 1Gi
+    existingClaim: null
 
 #########################
 ## PostgreSQL subchart ##
@@ -77,7 +83,9 @@ postgresql:
     tag: latest
 
   persistence:
+    enabled: true
     size: 1Gi
+    existingClaim: null
 
   postgresqlDatabase: signals
   postgresqlUsername: signals

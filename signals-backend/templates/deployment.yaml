@@ -112,5 +112,9 @@ spec:
               subPath: attachments
       volumes:
         - name: media
+        {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: {{ template "signals-backend.fullname" . }}
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
