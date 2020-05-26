@@ -12,6 +12,8 @@ spec:
       {{- include "signals-frontend.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ .Values.config | toJson | sha256sum }}
       labels:
         {{- include "signals-frontend.labels" . | nindent 8 }}
     spec:
@@ -35,14 +37,11 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          env:
-            - name: ROOT
-              value: https://{{ .Values.ingress.host }}/
-            - name: API_ROOT
-              value: {{ .Values.urls.apiRootUrl }}
-            - name: AUTH_ROOT
-              value: {{ .Values.urls.authRootUrl }}
-            - name: API_ROOT_MLTOOL
-              value: {{ .Values.urls.apiRootMlToolUrl }}
-            - name: API_ROOT_MAPSERVER
-              value: {{ .Values.urls.apiRootMapServerUrl }}
+          volumeMounts:
+            - name: config
+              mountPath: /environment.conf.json
+              subPath: "environment.conf.json"
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "signals-frontend.fullname" . }}
