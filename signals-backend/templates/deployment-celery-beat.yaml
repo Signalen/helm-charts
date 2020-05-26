@@ -1,21 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "signals-api.celery-beat" . }}
+  name: {{ template "signals-backend.celery-beat" . }}
   labels:
-    {{- include "signals-api.labels" . | nindent 4 }}
+    {{- include "signals-backend.labels" . | nindent 4 }}
     component: cellery-beat
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      {{- include "signals-api.selectorLabels" . | nindent 6 }}
+      {{- include "signals-backend.selectorLabels" . | nindent 6 }}
       component: celery-beat
+  strategy:
+    type: {{ .Values.deploymentStrategy }}
   template:
     metadata:
       labels:
-        {{- include "signals-api.labels" . | nindent 8 }}
+        {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-beat
     spec:
       containers:
@@ -30,7 +32,7 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "signals-api.fullname" . }}
+                  name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
 
             - name: DATABASE_HOST_OVERRIDE
@@ -44,7 +46,7 @@ spec:
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "signals-api.fullname" . }}
+                  name: {{ template "signals-backend.fullname" . }}
                   key: database-password
 
             - name: RABBITMQ_HOST
@@ -56,5 +58,5 @@ spec:
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "signals-api.fullname" . }}
+                  name: {{ template "signals-backend.fullname" . }}
                   key: rabbitmq-password

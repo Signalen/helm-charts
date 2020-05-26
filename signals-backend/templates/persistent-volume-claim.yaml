@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ template "signals-api.fullname" . }}
+  name: {{ template "signals-backend.fullname" . }}
   labels:
-    {{- include "signals-api.labels" . | nindent 4 }}
+    {{- include "signals-backend.labels" . | nindent 4 }}
 spec:
   accessModes:
     - ReadWriteOnce

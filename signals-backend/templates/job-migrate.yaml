@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "signals-api.migrate" . }}
+  name: {{ template "signals-backend.migrate" . }}
   labels:
-    {{- include "signals-api.labels" . | nindent 4 }}
+    {{- include "signals-backend.labels" . | nindent 4 }}
 spec:
   backoffLimit: 6
   ttlSecondsAfterFinished: 60
@@ -20,7 +20,7 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "signals-api.fullname" . }}
+                  name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
             - name: DATABASE_HOST_OVERRIDE
               value: {{ .Values.database.hostname }}
@@ -33,5 +33,5 @@ spec:
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "signals-api.fullname" . }}
+                  name: {{ template "signals-backend.fullname" . }}
                   key: database-password

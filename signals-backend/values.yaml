@@ -3,9 +3,10 @@ tags:
   rabbitmq: true
 
 replicaCount: 1
+deploymentStrategy: Recreate
 
 image:
-  repository: registry.gitlab.com/commonground/signals/backend/api
+  repository: signalen/backend
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -21,7 +22,7 @@ persistence:
   size: 1Gi
 
 database:
-  hostname: signals-api-postgresql
+  hostname: signals-backend-postgresql
   databaseName: signals
   username: signals
   password: signals
@@ -30,7 +31,7 @@ celery:
   worker:
     replicaCount: 1
   rabbitmq:
-    hostname: signals-api-rabbitmq
+    hostname: signals-backend-rabbitmq
     username: signals
     password: signals
 
