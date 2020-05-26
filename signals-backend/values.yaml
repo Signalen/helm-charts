@@ -2,6 +2,7 @@ tags:
   postgresql: true
   rabbitmq: true
 
+allowedHosts: "*"
 replicaCount: 1
 deploymentStrategy: Recreate
 

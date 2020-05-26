@@ -68,8 +68,8 @@ spec:
               value: signals.settings.production
             - name: DJANGO_LOG_LEVEL
               value: debug
-            - name: ALLOWED_HOST
-              value: "*"
+            - name: ALLOWED_HOSTS
+              value: {{ .Values.allowedHosts | quote }}
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
