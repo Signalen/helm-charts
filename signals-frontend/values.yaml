@@ -14,16 +14,16 @@ ingress:
   host: frontend.signals.local
 
 config:
-  logoUrl: null,
-  logoHeight: 0,
+  logoUrl: null
+  logoHeight: 0
   sentry: null
   matamo: null
   language:
     footer1: "Hier komt een informatietekst"
     footer2: "die je zelf kan configureren."
   links:
-    home: http://home.local
-    privacy: http://privacy.local
+    home: https://frontend.signals.local
+    privacy: https://privacy.signals.local
   theme: {}
   map:
     tiles:
