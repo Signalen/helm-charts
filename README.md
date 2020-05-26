@@ -7,15 +7,15 @@
 First create the namespace `signals` and initialize the backend chart:
 
 ```console
-kubectl create namespace signals
-(cd signals-backend/ && helm dependency update)
+$ kubectl create namespace signals
+$ (cd signals-backend/ && helm dependency update)
 ```
 
 Then install the chart:
 
 ```console
-helm upgrade --install -n signals signals-frontend ./signals-frontend
-helm upgrade --install -n signals signals-backend ./signals-backend
+$ helm upgrade --install -n signals signals-frontend ./signals-frontend
+$ helm upgrade --install -n signals signals-backend ./signals-backend
 ```
 
 ## Deleting the charts
@@ -23,12 +23,12 @@ helm upgrade --install -n signals signals-backend ./signals-backend
 To delete the charts:
 
 ```console
-helm delete -n signals signals-frontend
-helm delete -n signals signals-backend
+$ helm delete -n signals signals-frontend
+$ helm delete -n signals signals-backend
 ```
 
 And finally remove the namespace:
 
 ```console
-kubectl delete namespace signals
+$ kubectl delete namespace signals
 ```
