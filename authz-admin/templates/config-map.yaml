@@ -12,7 +12,7 @@ data:
       bind_port: 8080
 
       required_accounts:
-        admin@signalen.demoground.nl:
+        {{ .Values.demoAccount.emailAddress }}:
           - SIG_ROLE
 
       datasets:

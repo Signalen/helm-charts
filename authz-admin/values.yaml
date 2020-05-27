@@ -9,6 +9,9 @@ service:
   type: ClusterIP
   port: 80
 
+demoAccount:
+  emailAddress: admin@signals.local
+
 apiKey: rNkPci1dkNWCS0Brqpq3
 jwkSet: >
   {
