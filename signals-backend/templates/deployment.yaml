@@ -41,46 +41,43 @@ spec:
               protocol: TCP
               containerPort: 8080
           env:
+            - name: ALLOWED_HOSTS
+              value: {{ .Values.allowedHosts | quote }}
+            - name: DJANGO_LOG_LEVEL
+              value: error
+            - name: DJANGO_SETTINGS_MODULE
+              value: signals.settings.production
             - name: UWSGI_HTTP
               value: 0.0.0.0:8080
+            - name: UWSGI_MODULE
+              value: signals.wsgi:application
+            - name: UWSGI_CALLABLE
+              value: application
+            - name: UWSGI_DIE_ON_TERM
+              value: "1"
+            - name: UWSGI_LAZY_APPS
+              value: "1"
             - name: UWSGI_MASTER
               value: "1"
+            - name: UWSGI_PROCESSES
+              value: "4"
+            - name: UWSGI_STATIC_EXPIRES
+              value: "/* 3600"
             - name: UWSGI_STATIC_INDEX
               value: index.html
             - name: UWSGI_STATIC_MAP
               value: /signals/static=/static
-            - name: UWSGI_CALLABLE
-              value: application
             - name: UWSGI_VACUUM
               value: "1"
-            - name: UWSGI_STATIC_EXPIRES
-              value: "/* 3600"
-            - name: UWSGI_OFFLOAD_THREADS
-              value: "1"
-            - name: UWSGI_HARAKIRI
-              value: "30"
-            - name: UWSGI_DIE_ON_TERM
-              value: "1"
-            - name: UWSGI_MODULE
-              value: signals.wsgi:application
-
-            - name: DJANGO_SETTINGS_MODULE
-              value: signals.settings.production
-            - name: DJANGO_LOG_LEVEL
-              value: debug
-            - name: ALLOWED_HOSTS
-              value: {{ .Values.allowedHosts | quote }}
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
-
             - name: DATAPUNT_API_URL
               value: {{ .Values.datapuntApiUrl }}
             - name: DWH_MEDIA_ROOT
               value: /dwh_media
-
             - name: DATABASE_HOST_OVERRIDE
               value: {{ .Values.database.hostname }}
             - name: DATABASE_PORT_OVERRIDE
@@ -94,7 +91,6 @@ spec:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: database-password
-
             - name: RABBITMQ_HOST
               value: {{ .Values.celery.rabbitmq.hostname }}
             - name: RABBITMQ_VHOST
