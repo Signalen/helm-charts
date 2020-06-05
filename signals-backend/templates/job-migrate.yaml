@@ -11,7 +11,7 @@ spec:
     spec:
       restartPolicy: OnFailure
       containers:
-        - name: manage-migrate
+        - name: api-migrate-{{ randAlphaNum 5 | lower }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/app/manage.py"]
