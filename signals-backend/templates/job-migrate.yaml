@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "signals-backend.migrate" . }}
+  name: {{ template "signals-backend.migrate" . }}-{{ randAlphaNum 5 | lower }}
   labels:
     {{- include "signals-backend.labels" . | nindent 4 }}
 spec:
@@ -11,7 +11,7 @@ spec:
     spec:
       restartPolicy: OnFailure
       containers:
-        - name: api-migrate-{{ randAlphaNum 5 | lower }}
+        - name: migrate
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/app/manage.py"]
