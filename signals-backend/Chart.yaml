@@ -2,7 +2,7 @@ apiVersion: v2
 name: signals-backend
 description: The API for the Signals application
 type: application
-version: 0.1.0
+version: 0.2.0
 
 dependencies:
   - name: postgresql
@@ -15,3 +15,8 @@ dependencies:
     repository: https://kubernetes-charts.storage.googleapis.com
     tags:
       - rabbitmq
+  - name: elasticsearch
+    version: ~6.8.0
+    repository: https://helm.elastic.co
+    tags:
+      - elasticsearch

@@ -6,7 +6,7 @@ metadata:
     {{- include "signals-backend.labels" . | nindent 4 }}
     component: cellery-worker
 spec:
-  replicas: {{ .Values.celery.worker.replicaCount }}
+  replicas: {{ .Values.workerReplicaCount }}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -34,59 +34,54 @@ spec:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
-
             - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.database.hostname }}
+              value: {{ .Values.settings.database.host }}
             - name: DATABASE_PORT_OVERRIDE
-              value: "5432"
-            - name: DATABASE_NAME
-              value: {{ .Values.database.databaseName }}
+              value: {{ .Values.settings.database.port | quote }}
             - name: DATABASE_USER
-              value: {{ .Values.database.username }}
+              value: {{ .Values.settings.database.username }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: database-password
-
+            - name: DATABASE_NAME
+              value: {{ .Values.settings.database.name }}
             - name: RABBITMQ_HOST
-              value: {{ .Values.celery.rabbitmq.hostname }}
-            - name: RABBITMQ_VHOST
-              value: ""
+              value: {{ .Values.settings.rabbitmq.host }}
             - name: RABBITMQ_USER
-              value: {{ .Values.celery.rabbitmq.username }}
+              value: {{ .Values.settings.rabbitmq.username }}
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: rabbitmq-password
-
+            - name: RABBITMQ_VHOST
+              value: {{ .Values.settings.rabbitmq.vhost }}
             - name: EMAIL_HOST
-              value: {{ .Values.smtp.hostname }}
+              value: {{ .Values.settings.email.hostname }}
             - name: EMAIL_PORT
-              value: {{ .Values.smtp.port | quote }}
+              value: {{ .Values.settings.email.port | quote }}
             - name: EMAIL_HOST_USER
-              value: {{ .Values.smtp.username }}
+              value: {{ .Values.settings.email.username }}
             - name: EMAIL_HOST_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
-                  key: smtp-password
+                  key: email-password
             - name: EMAIL_USE_TLS
-              value: {{ .Values.smtp.useTLS | quote }}
+              value: {{ .Values.settings.email.useTLS | quote }}
             - name: EMAIL_USE_SSL
-              value: {{ .Values.smtp.useSSL | quote }}
-
+              value: {{ .Values.settings.email.useSSL | quote }}
             - name: EMAIL_FLEX_HORECA_INTEGRATION_ADDRESS
-              value: {{ .Values.emailAddresses.flexHoreca }}
+              value: {{ .Values.settings.emailAddresses.flexHoreca }}
             - name: EMAIL_TOEZICHT_OR_NIEUW_WEST_INTEGRATION_ADDRESS
-              value: {{ .Values.emailAddresses.toezichtNieuwWest }}
+              value: {{ .Values.settings.emailAddresses.toezichtNieuwWest }}
             - name: EMAIL_VTH_NIEUW_WEST_INTEGRATION_ADDRESS
-              value: {{ .Values.emailAddresses.vthNieuwWest }}
-
-            {{- if .Values.sigmax.enabled }}
+              value: {{ .Values.settings.emailAddresses.vthNieuwWest }}
+            {{- if .Values.settings.sigmax.enabled }}
             - name: SIGMAX_SERVER
-              value: {{ .Values.sigmax.serverUrl }}
+              value: {{ .Values.settings.sigmax.serverUrl }}
             - name: SIGMAX_AUTH_TOKEN
               valueFrom:
                 secretKeyRef:
