@@ -20,6 +20,8 @@ spec:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: api
     spec:
+      securityContext:
+        fsGroup: 999
       containers:
         - name: api
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
