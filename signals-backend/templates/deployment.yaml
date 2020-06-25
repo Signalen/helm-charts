@@ -108,8 +108,7 @@ spec:
               value: {{ .Values.settings.elasticsearch.index }}
           volumeMounts:
             - name: media
-              mountPath: /media/attachments
-              subPath: attachments
+              mountPath: /media
       volumes:
         - name: media
         {{- if .Values.persistence.enabled }}
