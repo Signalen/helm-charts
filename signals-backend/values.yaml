@@ -1,9 +1,11 @@
 tags:
   postgresql: true
   rabbitmq: true
+  elasticsearch: true
 
-allowedHosts: "*"
 replicaCount: 1
+workerReplicaCount: 1
+
 deploymentStrategy: Recreate
 
 image:
@@ -16,63 +18,57 @@ service:
   port: 80
 
 ingress:
-  class: traefik
   host: api.signals.local
+  annotations:
+    ingress.kubernetes.io/hsts-include-subdomains: "true"
+    ingress.kubernetes.io/hsts-max-age: "315360000"
+    ingress.kubernetes.io/hsts-preload: "true"
+    ingress.kubernetes.io/ssl-redirect: "true"
 
 persistence:
   enabled: true
   size: 1Gi
   existingClaim: null
 
-database:
-  hostname: signals-backend-postgresql
-  databaseName: signals
-  username: signals
-  password: signals
+settings:
+  allowedHosts: "*"
 
-celery:
-  worker:
-    replicaCount: 1
-  rabbitmq:
-    hostname: signals-backend-rabbitmq
+  database:
+    host: signals-backend-postgresql
+    port: 5432
     username: signals
     password: signals
-
-smtp:
-  hostname: mailhog
-  port: 25
-  username: ""
-  password: ""
-  useTLS: false
-  useSSL: false
-
-datapuntApiUrl: https://api.data.amsterdam.nl/
-
-emailAddresses:
-  flexHoreca: flex-horeca@signals.local
-  toezichtNieuwWest: toezicht-nieuw-west@signals.local
-  vthNieuwWest: vth-nieuw-west@signals.local
-
-sigmax:
-  enabled: false
-  serverUrl: http://sigmax.sigmax
-  authToken: insecure
-
-#######################
-## RabbitMQ subchart ##
-#######################
-rabbitmq:
-  image:
-    tag: "3.8"
+    name: signals
 
   rabbitmq:
+    host: signals-backend-rabbitmq
     username: signals
     password: signals
+    vhost: ""
 
-  persistence:
-    enabled: true
-    size: 1Gi
-    existingClaim: null
+  elasticsearch:
+    host: elasticsearch
+    index: signals
+
+  email:
+    hostname: mailhog
+    port: 25
+    username: ""
+    password: ""
+    useTLS: false
+    useSSL: false
+
+  datapuntApiUrl: https://api.data.amsterdam.nl/
+
+  emailAddresses:
+    flexHoreca: flex-horeca@signals.local
+    toezichtNieuwWest: toezicht-nieuw-west@signals.local
+    vthNieuwWest: vth-nieuw-west@signals.local
+
+  sigmax:
+    enabled: false
+    serverUrl: http://sigmax.sigmax
+    authToken: insecure
 
 #########################
 ## PostgreSQL subchart ##
@@ -90,3 +86,36 @@ postgresql:
   postgresqlDatabase: signals
   postgresqlUsername: signals
   postgresqlPassword: signals
+
+#######################
+## RabbitMQ subchart ##
+#######################
+rabbitmq:
+  image:
+    tag: "3.8"
+
+  rabbitmq:
+    username: signals
+    password: signals
+
+  persistence:
+    enabled: true
+    size: 1Gi
+    existingClaim: null
+
+############################
+## Elasticsearch subchart ##
+############################
+elasticsearch:
+  replicas: 1
+  minimumMasterNodes: 1
+
+  esJavaOpts: "-Xmx512m -Xms512m"
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"

@@ -34,29 +34,27 @@ spec:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
-
             - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.database.hostname }}
+              value: {{ .Values.settings.database.host }}
             - name: DATABASE_PORT_OVERRIDE
-              value: "5432"
-            - name: DATABASE_NAME
-              value: {{ .Values.database.databaseName }}
+              value: {{ .Values.settings.database.port | quote }}
             - name: DATABASE_USER
-              value: {{ .Values.database.username }}
+              value: {{ .Values.settings.database.username }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: database-password
-
+            - name: DATABASE_NAME
+              value: {{ .Values.settings.database.name }}
             - name: RABBITMQ_HOST
-              value: {{ .Values.celery.rabbitmq.hostname }}
-            - name: RABBITMQ_VHOST
-              value: ""
+              value: {{ .Values.settings.rabbitmq.host }}
             - name: RABBITMQ_USER
-              value: {{ .Values.celery.rabbitmq.username }}
+              value: {{ .Values.settings.rabbitmq.username }}
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: rabbitmq-password
+            - name: RABBITMQ_VHOST
+              value: {{ .Values.settings.rabbitmq.vhost }}

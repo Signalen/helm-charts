@@ -42,7 +42,7 @@ spec:
               containerPort: 8080
           env:
             - name: ALLOWED_HOSTS
-              value: {{ .Values.allowedHosts | quote }}
+              value: {{ .Values.settings.allowedHosts | quote }}
             - name: DJANGO_LOG_LEVEL
               value: error
             - name: DJANGO_SETTINGS_MODULE
@@ -75,33 +75,37 @@ spec:
                   name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
             - name: DATAPUNT_API_URL
-              value: {{ .Values.datapuntApiUrl }}
+              value: {{ .Values.settings.datapuntApiUrl }}
             - name: DWH_MEDIA_ROOT
               value: /dwh_media
             - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.database.hostname }}
+              value: {{ .Values.settings.database.host }}
             - name: DATABASE_PORT_OVERRIDE
-              value: "5432"
-            - name: DATABASE_NAME
-              value: {{ .Values.database.databaseName }}
+              value: {{ .Values.settings.database.port | quote }}
             - name: DATABASE_USER
-              value: {{ .Values.database.username }}
+              value: {{ .Values.settings.database.username }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: database-password
+            - name: DATABASE_NAME
+              value: {{ .Values.settings.database.name }}
             - name: RABBITMQ_HOST
-              value: {{ .Values.celery.rabbitmq.hostname }}
-            - name: RABBITMQ_VHOST
-              value: ""
+              value: {{ .Values.settings.rabbitmq.host }}
             - name: RABBITMQ_USER
-              value: {{ .Values.rabbitmq.rabbitmq.username }}
+              value: {{ .Values.settings.rabbitmq.username }}
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: rabbitmq-password
+            - name: RABBITMQ_VHOST
+              value: {{ .Values.settings.rabbitmq.vhost }}
+            - name: ELASTICSEARCH_HOST
+              value: {{ .Values.settings.elasticsearch.host }}
+            - name: ELASTICSEARCH_INDEX
+              value: {{ .Values.settings.elasticsearch.index }}
           volumeMounts:
             - name: media
               mountPath: /media/attachments
