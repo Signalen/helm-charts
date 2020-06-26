@@ -81,6 +81,8 @@ spec:
               value: {{ .Values.settings.elasticsearch.host }}
             - name: ELASTICSEARCH_INDEX
               value: {{ .Values.settings.elasticsearch.index }}
+            - name: PUB_JWKS
+              value: {{ .Values.settings.pubJwks | quote }}
           volumeMounts:
             - name: media
               mountPath: /media

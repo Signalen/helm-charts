@@ -33,6 +33,8 @@ persistence:
 settings:
   allowedHosts: "*"
 
+  pubJwks: ""
+
   database:
     host: signals-backend-postgresql
     port: 5432
