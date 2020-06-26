@@ -83,6 +83,8 @@ spec:
               value: {{ .Values.settings.elasticsearch.index }}
             - name: PUB_JWKS
               value: {{ .Values.settings.pubJwks | quote }}
+            - name: USER_ID_FIELD
+              value: {{ .Values.settings.userIdField }}
           volumeMounts:
             - name: media
               mountPath: /media
