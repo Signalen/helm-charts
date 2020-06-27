@@ -34,7 +34,8 @@ settings:
   allowedHosts: "*"
 
   pubJwks: ""
-  userIdField: "email"
+  jwksUrl: ""
+  userIdField: "sub"
 
   database:
     host: signals-backend-postgresql
