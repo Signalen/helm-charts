@@ -1,5 +1,0 @@
-apiVersion: v2
-name: authz
-description: OAuth 2.0 authorization service
-type: application
-version: 0.1.0
