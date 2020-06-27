@@ -88,3 +88,7 @@ spec:
                   name: {{ template "signals-backend.fullname" . }}-sigmax
                   key: auth-token
             {{- end }}
+            - name: ELASTICSEARCH_HOST
+              value: {{ .Values.settings.elasticsearch.host }}
+            - name: ELASTICSEARCH_INDEX
+              value: {{ .Values.settings.elasticsearch.index }}

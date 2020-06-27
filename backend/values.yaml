@@ -51,7 +51,7 @@ settings:
     vhost: ""
 
   elasticsearch:
-    host: elasticsearch
+    host: elasticsearch-master:9200 # first part corresponds with elasticsearch.clusterName
     index: signals
 
   email:
@@ -111,6 +111,8 @@ rabbitmq:
 ## Elasticsearch subchart ##
 ############################
 elasticsearch:
+  clusterName: elasticsearch
+
   replicas: 1
   minimumMasterNodes: 1
 

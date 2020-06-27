@@ -67,6 +67,10 @@ Create the name of the service account to use
   {{- printf "%s-migrate" (include "signals-backend.fullname" .) -}}
 {{- end -}}
 
+{{- define "signals-backend.elasticsearch-index" -}}
+  {{- printf "%s-elasticsearch-index" (include "signals-backend.fullname" .) -}}
+{{- end -}}
+
 {{- define "signals-backend.celery-worker" -}}
   {{- printf "%s-celery-worker" (include "signals-backend.fullname" .) -}}
 {{- end -}}
