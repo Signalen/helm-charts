@@ -70,9 +70,9 @@ spec:
                   name: {{ template "signals-backend.fullname" . }}
                   key: email-password
             - name: EMAIL_USE_TLS
-              value: {{ .Values.settings.email.useTLS | quote }}
+              value: "{{ if .Values.settings.email.useTLS }}True{{ end }}"
             - name: EMAIL_USE_SSL
-              value: {{ .Values.settings.email.useSSL | quote }}
+              value: "{{ if .Values.settings.email.useSSL }}True{{ end }}"
             - name: EMAIL_FLEX_HORECA_INTEGRATION_ADDRESS
               value: {{ .Values.settings.emailAddresses.flexHoreca }}
             - name: EMAIL_TOEZICHT_OR_NIEUW_WEST_INTEGRATION_ADDRESS
