@@ -87,6 +87,8 @@ spec:
               value: {{ .Values.settings.jwksUrl }}
             - name: USER_ID_FIELD
               value: {{ .Values.settings.userIdField }}
+            - name: SIGNALS_ML_TOOL_ENDPOINT
+              value: {{ .Values.settings.classificationService }}
           volumeMounts:
             - name: media
               mountPath: /media
