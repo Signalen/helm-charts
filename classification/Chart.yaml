@@ -1,0 +1,6 @@
+apiVersion: v2
+name: signals-classification
+description: Machine learning prediction API
+
+type: application
+version: 0.1.0

@@ -1,0 +1,49 @@
+replicaCount: 1
+
+image:
+  repository: signalen/classification
+  tag: latest
+  pullPolicy: IfNotPresent
+
+signalsCategoryUrl: https://backend.signalen.demoground.nl/signals/v1/public/terms
+modelsDirectory: /models
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  host: classification.signals.local
+  annotations:
+    ingress.kubernetes.io/hsts-include-subdomains: "true"
+    ingress.kubernetes.io/hsts-max-age: "315360000"
+    ingress.kubernetes.io/hsts-preload: "true"
+    ingress.kubernetes.io/ssl-redirect: "true"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  existingClaim: null
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
