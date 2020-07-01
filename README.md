@@ -16,6 +16,7 @@ Then install the charts:
 ```console
 $ helm upgrade --install -n signals frontend ./frontend
 $ helm upgrade --install -n signals backend ./backend
+$ helm upgrade --install -n signals classification ./classification
 ```
 
 ## Delete the charts
@@ -25,6 +26,7 @@ To delete the charts:
 ```console
 $ helm delete -n signals frontend
 $ helm delete -n signals backend
+$ helm delete -n signals classification
 ```
 
 And finally remove the namespace:
