@@ -118,6 +118,7 @@ elasticsearch:
   replicas: 1
   minimumMasterNodes: 1
   maxUnavailable: false
+  clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
 
   esJavaOpts: "-Xmx512m -Xms512m"
 
