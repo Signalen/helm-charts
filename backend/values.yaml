@@ -117,6 +117,7 @@ elasticsearch:
 
   replicas: 1
   minimumMasterNodes: 1
+  maxUnavailable: false
 
   esJavaOpts: "-Xmx512m -Xms512m"
 
