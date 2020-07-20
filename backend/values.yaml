@@ -38,7 +38,7 @@ persistence:
 
 settings:
   allowedHosts: "*"
-  defaultPdokMunicipalities: "'s-Hertogenbosch,"
+  defaultPdokMunicipalities: ""
   pubJwks: ""
   jwksUrl: ""
   userIdField: "sub"
