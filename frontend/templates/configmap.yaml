@@ -5,4 +5,5 @@ metadata:
   labels:
     {{- include "signals-frontend.labels" . | nindent 4 }}
 data:
-  environment.conf.json: {{ .Values.config | toJson | quote }}
+  environment.conf.json: |-
+    {{ .Values.config | toJson | nindent 4 }}

@@ -24,53 +24,76 @@ ingress:
         - frontend.signals.local
 
 config:
+  apiBaseUrl: https://api.signals.local/signals
+  mapsBaseUrl: https://map.data.amsterdam.nl/maps
+  oidc:
+    clientId: signals
+    authEndpoint: https://dex.signals.local/auth
+    responseType: id_token
+    scope: "openid email profile"
+  head:
+    androidIcon: "/icon_192x192.png"
+    backgroundColor: "#ffffff"
+    favicon: "/favicon.png"
+    iosIcon: "/icon_180x180.png"
+    statusBarStyle: "default"
+    themeColor: "#ec0000"
+  logo:
+    url: null
+    width: 0
+    height: 0
+    smallWidth: 0
+    smallHeight: 0
   logoUrl: null
   logoHeight: 0
-  sentry: null
-  matamo: null
+  sentry:
+    dsn: ""
+  matamo:
+    urlBase: ""
+    siteId: 0
   language:
-    footer1: "Hier komt een informatietekst"
-    footer2: "die je zelf kan configureren."
+    avgDisclaimer: "De gemeente Amsterdam verwerkt uw persoonsgegevens op een zorgvuldige en veilige manier in overeenstemming met de geldende wet- en regelgeving, waaronder de Algemene Verordening Gegevensbescherming. Lees meer hierover op <a href='##AVG_DISCLAIMER_URL##'>Privacyverklaring Meldingen openbare ruimte en overlast</a>."
+    consentToContactSharing: "Ja, ik geef de gemeente Amsterdam toestemming om mijn contactgegevens te delen met andere organisaties, als dat nodig is om mijn melding goed op te lossen."
+    footer1: "Bel het Gemeentelijk informatienummer: 000000"
+    footer2: "op werkdagen van 08.00 tot 18.00 uur."
+    headerTitle: ""
+    phoneNumber: "14 020"
+    shortTitle: "SIA"
+    siteTitle: "SIA - Signalen Informatievoorziening Amsterdam"
+    smallHeaderTitle: "SIA"
+    title: "Signalen Informatievoorziening Amsterdam"
+    urgentContactInfo: "Voor spoedeisende zaken kunt u ook telefonisch contact opnemen met 14 020."
   links:
-    home: https://frontend.signals.local
-    privacy: https://privacy.signals.local
-  theme: {}
+    help: "https://tamtam.amsterdam.nl/do/office?id=1723860-6f6666696365"
+    home: "https://www.amsterdam.nl"
+    privacy: "https://www.amsterdam.nl/privacy/specifieke/privacyverklaringen-wonen/meldingen-overlast-privacy/"
+  theme:
+    primary:
+      main: "#004699"
+      dark: "#00387a"
+    secondary:
+      main: "#ec0000"
+      dark: "#bc0000"
+    support:
+      valid: "#00A03C"
+      invalid: "#EC0000"
+      focus: "#FEC813"
+    error:
+      main: "#ec0000"
   map:
-    tiles:
-      args:
-        - "https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png"
-      options:
-        subdomains: ["t1", "t2", "t3", "t4"]
-        tms: true
-        attribution: "Kaartgegevens CC-BY-4.0 Gemeente Amsterdam"
+    municipality: "Amsterdam"
     options:
       maxBounds:
         - [52.25168, 4.64034]
         - [52.50536, 5.10737]
       center: [52.3731081, 4.8932945]
       zoom: 10
-  ROOT: https://api.signals.local/
-  AUTH_ROOT: https://auth.signals.local/
-  API_ROOT_MAPSERVER: https://map.data.amsterdam.nl/
-  USERS_ENDPOINT: https://api.signals.local/signals/v1/private/users/
-  ROLES_ENDPOINT: https://api.signals.local/signals/v1/private/roles/
-  PERMISSIONS_ENDPOINT: https://api.signals.local/signals/v1/private/permissions/
-  SEARCH_ENDPOINT: https://api.signals.local/signals/v1/private/search
-  PREDICTION_ENDPOINT: https://api.signals.local/signals/category/prediction
-  INCIDENT_PUBLIC_ENDPOINT: https://api.signals.local/signals/v1/public/signals/
-  INCIDENT_PRIVATE_ENDPOINT: https://api.signals.local/signals/v1/private/signals/
-  INCIDENTS_ENDPOINT: https://api.signals.local/signals/v1/private/signals/
-  GEOGRAPHY_ENDPOINT: https://api.signals.local/signals/v1/private/signals/geography
-  PRIORITY_ENDPOINT: https://api.signals.local/signals/auth/priority/
-  FEEDBACK_STANDARD_ANSWERS_ENDPOINT: https://api.signals.local/signals/v1/public/feedback/standard_answers/
-  FEEDBACK_FORMS_ENDPOINT: https://api.signals.local/signals/v1/public/feedback/forms/
-  AUTH_ME_ENDPOINT: https://api.signals.local/signals/v1/private/me/
-  CATEGORIES_PRIVATE_ENDPOINT: https://api.signals.local/signals/v1/private/categories/
-  CATEGORIES_ENDPOINT: https://api.signals.local/signals/v1/public/terms/categories/
-  TERMS_ENDPOINT: https://api.signals.local/signals/v1/private/terms/categories/
-  IMAGE_ENDPOINT: https://api.signals.local/signals/signal/image/
-  FILTERS_ENDPOINT: https://api.signals.local/signals/v1/private/me/filters/
-  DEPARTMENTS_ENDPOINT: https://api.signals.local/signals/v1/private/departments/
-  DASHBOARD_ENDPOINT: https://api.signals.local/signals/experimental/dashboards/1
-  OVL_KLOKKEN_LAYER: https://map.data.amsterdam.nl/maps/openbare_verlichting?REQUEST=GetFeature&SERVICE=wfs&OUTPUTFORMAT=application/json;%20subtype=geojson;%20charset=utf-8&Typename=Klokken&version=1.1.0&srsname=urn:ogc:def:crs:EPSG::4326
-  OVL_VERLICHTING_LAYER: https://map.data.amsterdam.nl/maps/openbare_verlichting?REQUEST=GetFeature&SERVICE=wfs&OUTPUTFORMAT=application/json;%20subtype=geojson;%20charset=utf-8&Typename=Verlichting&version=1.1.0&srsname=urn:ogc:def:crs:EPSG::4326
+    tiles:
+      args:
+        - "https://{s}.data.amsterdam.nl/topo_rd/{z}/{x}/{y}.png"
+      options:
+        attribution: "Kaartgegevens CC-BY-4.0 Gemeente Amsterdam"
+        subdomains: ["t1", "t2", "t3", "t4"]
+        tms: true
+  fetchQuestionsFromBackend: true
+  showVulaanControls: true

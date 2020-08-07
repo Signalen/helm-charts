@@ -90,7 +90,7 @@ spec:
             - name: USER_ID_FIELD
               value: {{ .Values.settings.userIdField }}
             - name: SIGNALS_ML_TOOL_ENDPOINT
-              value: {{ .Values.settings.classificationService }}
+              value: {{ .Values.settings.classificationEndpoint }}
           volumeMounts:
             - name: media
               mountPath: /media
