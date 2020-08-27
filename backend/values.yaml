@@ -70,7 +70,7 @@ settings:
 
   datapuntApiUrl: https://api.data.amsterdam.nl/
 
-  classificationService: https://api.data.amsterdam.nl/signals_mltool
+  classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
 
   emailAddresses:
     flexHoreca: flex-horeca@signals.local
