@@ -39,8 +39,8 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: config
-              mountPath: /environment.conf.json
-              subPath: "environment.conf.json"
+              mountPath: /app.json
+              subPath: "app.json"
       volumes:
         - name: config
           configMap:
