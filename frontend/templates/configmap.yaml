@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "signals-frontend.fullname" . }}
-  labels:
-    {{- include "signals-frontend.labels" . | nindent 4 }}
+  name: { { template "signals-frontend.fullname" . } }
+  labels: { { - include "signals-frontend.labels" . | nindent 4 } }
 data:
-  environment.conf.json: |-
+  app.json: |-
     {{ .Values.config | toJson | nindent 4 }}
