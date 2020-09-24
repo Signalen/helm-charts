@@ -19,7 +19,8 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  fsGroup: 65534 # Make persistent volume writable for container user
 
 securityContext: {}
 
