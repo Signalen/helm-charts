@@ -73,12 +73,6 @@ spec:
               value: "{{ if .Values.settings.email.useTLS }}True{{ end }}"
             - name: EMAIL_USE_SSL
               value: "{{ if .Values.settings.email.useSSL }}True{{ end }}"
-            - name: EMAIL_FLEX_HORECA_INTEGRATION_ADDRESS
-              value: {{ .Values.settings.emailAddresses.flexHoreca }}
-            - name: EMAIL_TOEZICHT_OR_NIEUW_WEST_INTEGRATION_ADDRESS
-              value: {{ .Values.settings.emailAddresses.toezichtNieuwWest }}
-            - name: EMAIL_VTH_NIEUW_WEST_INTEGRATION_ADDRESS
-              value: {{ .Values.settings.emailAddresses.vthNieuwWest }}
             {{- if .Values.settings.sigmax.enabled }}
             - name: SIGMAX_SERVER
               value: {{ .Values.settings.sigmax.serverUrl }}
