@@ -86,3 +86,15 @@ spec:
               value: {{ .Values.settings.elasticsearch.host }}
             - name: ELASTICSEARCH_INDEX
               value: {{ .Values.settings.elasticsearch.index }}
+            - name: ORGANIZATION_NAME
+              value: {{ .Values.settings.organizationName | quote }}
+            - name: DEFAULT_FROM_EMAIL
+              value: {{ .Values.settings.defaultFromEmail | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterSource | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_DOMAIN_EXTENSIONS
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterDomainExtensions | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterExceptions | quote }}
+            - name: API_PDF_LOGO_STATIC_FILE
+              value: {{ .Values.settings.apiPdfLogoStaticFile | quote }}
