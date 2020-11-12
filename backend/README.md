@@ -19,6 +19,12 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `workerReplicaCount` | The number of background worker replicas | `1` |
 | `settings.allowedHosts` | Restrict the allowed hosts of the API | `*` |
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |
+| `settings.organizationName` | The name of the organization | `"Signalen"` |
+| `settings.defaultFromEmail` | The default from e-mail | `"webmaster@localhost"` |
+| `settings.apiTransformSourceBasedOnReporterSource` | The source to transform to when a complaint comes from a particular domain | `"Internal"` |
+| `settings.apiTransformSourceBasedOnReporterDomainExtensions` | The (comma-seperated) list of e-mail domains to automatically transform the source for | `"@localhost"` |
+| `settings.apiTransformSourceBasedOnReporterExceptions` | Do not transform the source automatically for these e-mail addresses | `"ignore@localhost"` |
+| `settings.apiPdfLogoStaticFile` | Link to PDF logo on local system | `"api/logo-gemeente-amsterdam.svg"` |
 | `settings.jwksUrl` | The JWKS url of the OpenID Connect Identity Provider | `""` |
 | `settings.userIdField` | The JWKS url of the OpenID Connect Identity Provider | `""` |
 | `settings.email.hostname` | The hostname of the SMTP server for e-mail notifications | `""` |

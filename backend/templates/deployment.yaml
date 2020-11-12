@@ -86,11 +86,23 @@ spec:
             - name: PUB_JWKS
               value: {{ .Values.settings.pubJwks | quote }}
             - name: JWKS_URL
-              value: {{ .Values.settings.jwksUrl }}
+              value: {{ .Values.settings.jwksUrl | quote }}
             - name: USER_ID_FIELD
-              value: {{ .Values.settings.userIdField }}
+              value: {{ .Values.settings.userIdField | quote }}
             - name: SIGNALS_ML_TOOL_ENDPOINT
-              value: {{ .Values.settings.classificationEndpoint }}
+              value: {{ .Values.settings.classificationEndpoint | quote }}
+            - name: ORGANIZATION_NAME
+              value: {{ .Values.settings.organizationName | quote }}
+            - name: DEFAULT_FROM_EMAIL
+              value: {{ .Values.settings.defaultFromEmail | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE
+              value: {{ .values.settings.apiTransformSourceBasedOnReporterSource | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_DOMAIN_EXTENSIONS
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterDomainExtensions | quote }}
+            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterExceptions | quote }}
+            - name: API_PDF_LOGO_STATIC_FILE
+              value: {{ .Values.settings.apiPdfLogoStaticFile | quote }}
           volumeMounts:
             - name: media
               mountPath: /media
