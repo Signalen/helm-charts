@@ -96,7 +96,7 @@ spec:
             - name: DEFAULT_FROM_EMAIL
               value: {{ .Values.settings.defaultFromEmail | quote }}
             - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE
-              value: {{ .values.settings.apiTransformSourceBasedOnReporterSource | quote }}
+              value: {{ .Values.settings.apiTransformSourceBasedOnReporterSource | quote }}
             - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_DOMAIN_EXTENSIONS
               value: {{ .Values.settings.apiTransformSourceBasedOnReporterDomainExtensions | quote }}
             - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS
