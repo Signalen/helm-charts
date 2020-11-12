@@ -43,6 +43,15 @@ settings:
   jwksUrl: ""
   userIdField: "sub"
 
+  organizationName: "Signalen"
+  defaultFromEmail: "webmaster@localhost"
+
+  apiTransformSourceBasedOnReporterSource: ""
+  apiTransformSourceBasedOnReporterDomainExtensions: ""
+  apiTransformSourceBasedOnReporterExceptions: ""
+
+  apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
+
   database:
     host: signals-backend-postgresql
     port: 5432
@@ -71,11 +80,6 @@ settings:
   datapuntApiUrl: https://api.data.amsterdam.nl/
 
   classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
-
-  emailAddresses:
-    flexHoreca: flex-horeca@signals.local
-    toezichtNieuwWest: toezicht-nieuw-west@signals.local
-    vthNieuwWest: vth-nieuw-west@signals.local
 
   sigmax:
     enabled: false
