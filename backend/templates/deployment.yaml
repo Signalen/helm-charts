@@ -42,6 +42,8 @@ spec:
               value: {{ .Values.settings.allowedHosts | quote }}
             - name: DEFAULT_PDOK_MUNICIPALITIES
               value: {{ .Values.settings.defaultPdokMunicipalities | quote }}
+            - name: DEFAULT_MAP_TILE_SERVER
+              value: {{ .Values.settings.defaultMapTileServer | quote }}
             - name: DJANGO_LOG_LEVEL
               value: error
             - name: DJANGO_SETTINGS_MODULE

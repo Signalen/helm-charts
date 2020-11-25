@@ -39,6 +39,7 @@ persistence:
 settings:
   allowedHosts: "*"
   defaultPdokMunicipalities: ""
+  defaultMapTileServer: ""
   pubJwks: ""
   jwksUrl: ""
   userIdField: "sub"
