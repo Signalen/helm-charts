@@ -40,7 +40,6 @@ settings:
   allowedHosts: "*"
   defaultPdokMunicipalities: ""
   defaultMapTileServer: ""
-  defaultAPIPdfLogo: ""
   pubJwks: ""
   jwksUrl: ""
   userIdField: "sub"
