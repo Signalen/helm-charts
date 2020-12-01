@@ -91,7 +91,7 @@ spec:
               value: {{ .Values.settings.pubJwks | quote }}
             - name: JWKS_URL
               value: {{ .Values.settings.jwksUrl | quote }}
-            - name: USER_ID_FIELD
+            - name: USER_ID_FIELDS
               value: {{ .Values.settings.userIdField | quote }}
             - name: SIGNALS_ML_TOOL_ENDPOINT
               value: {{ .Values.settings.classificationEndpoint | quote }}
