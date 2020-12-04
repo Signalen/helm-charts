@@ -108,7 +108,7 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /media
-            - name: dwh_media
+            - name: dwh-media
               mountPath: /dwh_media
           livenessProbe:
             httpGet:
@@ -134,7 +134,7 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
-        - name: dwh_media
+        - name: dwh-media
         {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
