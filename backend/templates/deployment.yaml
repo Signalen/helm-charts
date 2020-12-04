@@ -134,3 +134,10 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
+        - name: dwh_media
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
