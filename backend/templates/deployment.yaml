@@ -108,6 +108,8 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /media
+            - name: dwh_media
+              mountPath: /dwh_media
           livenessProbe:
             httpGet:
               path: /status/health
