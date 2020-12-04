@@ -128,16 +128,16 @@ spec:
               containerPort: 8000
       volumes:
         - name: media
-        {{- if .Values.persistence.enabled }}
+        {{- if .Values.persistence.media.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
+            claimName: {{ if .Values.persistence.media.existingClaim }}{{ .Values.persistence.media.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
         {{- else }}
           emptyDir: {}
         {{- end }}
         - name: dwh-media
-        {{- if .Values.persistence.enabled }}
+        {{- if .Values.persistence.datawarehouse.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}{{- end }}
+            claimName: {{ if .Values.persistence.datawarehouse.existingClaim }}{{ .Values.persistence.datawarehouse.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}-datawarehouse{{- end }}
         {{- else }}
           emptyDir: {}
         {{- end }}
