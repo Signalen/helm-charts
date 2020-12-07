@@ -34,6 +34,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "signals-backend.fullname" . }}
                   key: secret-key
+            - name: DWH_MEDIA_ROOT
+              value: /dwh_media
             - name: DATABASE_HOST_OVERRIDE
               value: {{ .Values.settings.database.host }}
             - name: DATABASE_PORT_OVERRIDE
