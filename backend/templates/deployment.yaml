@@ -23,6 +23,15 @@ spec:
     spec:
       securityContext:
         fsGroup: 999
+      initContainers:
+        - name: migrate
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/app/manage.py"]
+          args: ["migrate"]
+          envFrom:
+            - secretRef:
+                name: {{ template "signals-backend.fullname" . }}
       containers:
         - name: api
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
