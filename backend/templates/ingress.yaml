@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "signals-backend.fullname" . }}
@@ -25,7 +25,10 @@ spec:
       http:
         paths:
           - path: /signals
+            pathType: Prefix
             backend:
-              serviceName: {{ template "signals-backend.fullname" . }}
-              servicePort: http
+              service:
+                name: {{ template "signals-backend.fullname" . }}
+                port:
+                  name: http
 {{- end }}
