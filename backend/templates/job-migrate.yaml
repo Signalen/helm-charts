@@ -16,22 +16,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/app/manage.py"]
           args: ["migrate"]
-          env:
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: secret-key
-            - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.settings.database.host }}
-            - name: DATABASE_PORT_OVERRIDE
-              value: {{ .Values.settings.database.port | quote }}
-            - name: DATABASE_USER
-              value: {{ .Values.settings.database.username }}
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: database-password
-            - name: DATABASE_NAME
-              value: {{ .Values.settings.database.name }}
+          envFrom:
+            - secretRef:
+                name: {{ template "signals-backend.fullname" . }}

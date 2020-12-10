@@ -7,7 +7,6 @@ metadata:
     component: api
 spec:
   replicas: {{ .Values.replicaCount }}
-  revisionHistoryLimit: 2
   selector:
     matchLabels:
       {{- include "signals-backend.selectorLabels" . | nindent 6 }}
@@ -16,6 +15,8 @@ spec:
     type: {{ .Values.deploymentStrategy }}
   template:
     metadata:
+      annotations:
+        checksum/settings: {{ .Values.settings | toJson | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: api
@@ -37,74 +38,9 @@ spec:
             - '--static-map=/signals/static=/static'
             - '--static-map=/signals/media=/media'
             - '--die-on-term'
-          env:
-            - name: ALLOWED_HOSTS
-              value: {{ .Values.settings.allowedHosts | quote }}
-            - name: DEFAULT_PDOK_MUNICIPALITIES
-              value: {{ .Values.settings.defaultPdokMunicipalities | quote }}
-            - name: DEFAULT_MAP_TILE_SERVER
-              value: {{ .Values.settings.defaultMapTileServer | quote }}
-            - name: DJANGO_LOG_LEVEL
-              value: error
-            - name: DJANGO_SETTINGS_MODULE
-              value: signals.settings.production
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: secret-key
-            - name: DATAPUNT_API_URL
-              value: {{ .Values.settings.datapuntApiUrl }}
-            - name: DWH_MEDIA_ROOT
-              value: /dwh_media
-            - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.settings.database.host }}
-            - name: DATABASE_PORT_OVERRIDE
-              value: {{ .Values.settings.database.port | quote }}
-            - name: DATABASE_USER
-              value: {{ .Values.settings.database.username }}
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: database-password
-            - name: DATABASE_NAME
-              value: {{ .Values.settings.database.name }}
-            - name: RABBITMQ_HOST
-              value: {{ .Values.settings.rabbitmq.host }}
-            - name: RABBITMQ_USER
-              value: {{ .Values.settings.rabbitmq.username }}
-            - name: RABBITMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: rabbitmq-password
-            - name: RABBITMQ_VHOST
-              value: {{ .Values.settings.rabbitmq.vhost }}
-            - name: ELASTICSEARCH_HOST
-              value: {{ .Values.settings.elasticsearch.host }}
-            - name: ELASTICSEARCH_INDEX
-              value: {{ .Values.settings.elasticsearch.index }}
-            - name: PUB_JWKS
-              value: {{ .Values.settings.pubJwks | quote }}
-            - name: JWKS_URL
-              value: {{ .Values.settings.jwksUrl | quote }}
-            - name: USER_ID_FIELDS
-              value: {{ .Values.settings.userIdField | quote }}
-            - name: SIGNALS_ML_TOOL_ENDPOINT
-              value: {{ .Values.settings.classificationEndpoint | quote }}
-            - name: ORGANIZATION_NAME
-              value: {{ .Values.settings.organizationName | quote }}
-            - name: DEFAULT_FROM_EMAIL
-              value: {{ .Values.settings.defaultFromEmail | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterSource | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_DOMAIN_EXTENSIONS
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterDomainExtensions | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterExceptions | quote }}
-            - name: API_PDF_LOGO_STATIC_FILE
-              value: {{ .Values.settings.apiPdfLogoStaticFile | quote }}
+          envFrom:
+            - secretRef:
+                name: {{ template "signals-backend.fullname" . }}
           volumeMounts:
             - name: media
               mountPath: /media
