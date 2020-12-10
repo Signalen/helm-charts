@@ -6,7 +6,7 @@ tags:
 replicaCount: 1
 workerReplicaCount: 1
 
-deploymentStrategy: Recreate
+deploymentStrategy: RollingUpdate
 
 image:
   repository: signalen/backend

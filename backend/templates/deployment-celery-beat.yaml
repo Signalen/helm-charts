@@ -12,7 +12,7 @@ spec:
       {{- include "signals-backend.selectorLabels" . | nindent 6 }}
       component: celery-beat
   strategy:
-    type: {{ .Values.deploymentStrategy }}
+    type: Recreate
   template:
     metadata:
       annotations:
