@@ -8,7 +8,7 @@ metadata:
     {{- include "signals-backend.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - ReadWriteOnce
+{{- toYaml .Values.persistence.media.accessModes | nindent 4 }}
   resources:
     requests:
       storage: {{ .Values.persistence.media.size }}
@@ -23,7 +23,7 @@ metadata:
     {{- include "signals-backend.labels" . | nindent 4 }}
 spec:
   accessModes:
-    - ReadWriteMany
+{{ toYaml .Values.persistence.datawarehouse.accessModes | nindent 4 }}
   resources:
     requests:
       storage: {{ .Values.persistence.datawarehouse.size }}
