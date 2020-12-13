@@ -10,7 +10,7 @@ spec:
     component: api
   type: {{ .Values.service.type }}
   ports:
-    - name: http
-      protocol: TCP
-      port: {{ .Values.service.port }}
+    - port: {{ .Values.service.port }}
       targetPort: http
+      protocol: TCP
+      name: http
