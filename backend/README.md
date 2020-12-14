@@ -30,7 +30,8 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |
 | `settings.organizationName` | The name of the organization | `"Signalen"` |
 | `settings.defaultFromEmail` | The default from e-mail | `"webmaster@localhost"` |
-| `settings.apiTransformSourceBasedOnReporterSource` | The source to transform to when a complaint comes from a particular domain | `"Internal"` |
+| `settings.apiTransformSourceBasedOnReporter` | Transform the source of a complaint when a complaint comes from a particular e-mail domain | `false` |
+| `settings.apiTransformSourceBasedOnReporterSource` | The source to transform to when a complaint comes from a particular e-mail domain | `"Internal"` |
 | `settings.apiTransformSourceBasedOnReporterDomainExtensions` | The (comma-seperated) list of e-mail domains to automatically transform the source for | `"@localhost"` |
 | `settings.apiTransformSourceBasedOnReporterExceptions` | Do not transform the source automatically for these e-mail addresses | `"ignore@localhost"` |
 | `settings.apiPdfLogoStaticFile` | Link to PDF logo on local system | `"api/logo-gemeente-amsterdam.svg"` |

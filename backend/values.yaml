@@ -57,6 +57,7 @@ settings:
   organizationName: "Signalen"
   defaultFromEmail: "webmaster@localhost"
 
+  apiTransformSourceBasedOnReporter: false
   apiTransformSourceBasedOnReporterSource: "Internal"
   apiTransformSourceBasedOnReporterDomainExtensions: "@localhost"
   apiTransformSourceBasedOnReporterExceptions: "ignore@localhost"
