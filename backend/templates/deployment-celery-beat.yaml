@@ -16,7 +16,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/settings: {{ .Values.settings | toJson | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-beat
@@ -28,5 +29,7 @@ spec:
           command: ["/usr/local/bin/celery"]
           args: ["beat", "--app", "signals", "--loglevel", "WARNING", "--pidfile", "/tmp/celerybeat.pid"]
           envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
             - secretRef:
                 name: {{ template "signals-backend.fullname" . }}

@@ -16,7 +16,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/settings: {{ .Values.settings | toJson | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-worker
@@ -28,6 +29,8 @@ spec:
           command: ["/usr/local/bin/celery"]
           args: ["worker", "--app", "signals", "--loglevel", "WARNING"]
           envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
             - secretRef:
                 name: {{ template "signals-backend.fullname" . }}
           volumeMounts:

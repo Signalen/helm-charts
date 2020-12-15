@@ -4,22 +4,23 @@ metadata:
   name: {{ template "signals-backend.fullname" . }}
   labels:
     {{- include "signals-backend.labels" . | nindent 4 }}
-    component: api
+    component: backend
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "signals-backend.selectorLabels" . | nindent 6 }}
-      component: api
+      component: backend
   strategy:
     type: {{ .Values.deploymentStrategy }}
   template:
     metadata:
       annotations:
-        checksum/settings: {{ .Values.settings | toJson | sha256sum }}
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
-        component: api
+        component: backend
     spec:
       securityContext:
         fsGroup: 999
@@ -30,6 +31,8 @@ spec:
           command: ["/app/manage.py"]
           args: ["migrate"]
           envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
             - secretRef:
                 name: {{ template "signals-backend.fullname" . }}
       containers:
@@ -48,6 +51,8 @@ spec:
             - '--static-map=/signals/media=/media'
             - '--die-on-term'
           envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
             - secretRef:
                 name: {{ template "signals-backend.fullname" . }}
           volumeMounts:
