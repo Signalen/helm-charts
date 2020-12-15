@@ -6,7 +6,7 @@ tags:
 replicaCount: 1
 workerReplicaCount: 1
 
-deploymentStrategy: Recreate
+deploymentStrategy: RollingUpdate
 
 image:
   repository: signalen/backend
@@ -36,12 +36,17 @@ persistence:
     enabled: true
     size: 1Gi
     existingClaim: null
+    accessModes:
+      - ReadWriteOnce
   datawarehouse:
     enabled: false
     size: 1Gi
     existingClaim: null
+    accessModes:
+      - ReadWriteMany
 
 settings:
+  secretKey: "change-to-something-secret"
   allowedHosts: "*"
   defaultPdokMunicipalities: ""
   defaultMapTileServer: ""
@@ -52,6 +57,7 @@ settings:
   organizationName: "Signalen"
   defaultFromEmail: "webmaster@localhost"
 
+  apiTransformSourceBasedOnReporter: false
   apiTransformSourceBasedOnReporterSource: "Internal"
   apiTransformSourceBasedOnReporterDomainExtensions: "@localhost"
   apiTransformSourceBasedOnReporterExceptions: "ignore@localhost"

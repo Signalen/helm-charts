@@ -20,14 +20,18 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `persistence.media.enabled` | Enable persistence of media | `true` |
 | `persistence.media.size` | Specify the size of the media PVC | `1Gi` |
 | `persistence.media.existingClaim` | Name of an existing PVC to use | `null` |
+| `persistence.media.accessModes` | The accessModes of media | `{ ReadWriteOnce }` |
 | `persistence.datawarehouse.enabled` | Enable persistence of datawarehouse | `false` |
 | `persistence.datawarehouse.size` | Specify the size of the datawarehouse PVC | `1Gi` |
 | `persistence.datawarehouse.existingClaim` | Name of an existing PVC to use for datawarehouse | `null` |
+| `persistence.datawarehouse.accessModes` | The accessModes of datawarehouse | `{ ReadWriteMany }` |
+| `settings.secretKey` | The secret key of the backend | `change-to-something-secret` |
 | `settings.allowedHosts` | Restrict the allowed hosts of the API | `*` |
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |
 | `settings.organizationName` | The name of the organization | `"Signalen"` |
 | `settings.defaultFromEmail` | The default from e-mail | `"webmaster@localhost"` |
-| `settings.apiTransformSourceBasedOnReporterSource` | The source to transform to when a complaint comes from a particular domain | `"Internal"` |
+| `settings.apiTransformSourceBasedOnReporter` | Transform the source of a complaint when a complaint comes from a particular e-mail domain | `false` |
+| `settings.apiTransformSourceBasedOnReporterSource` | The source to transform to when a complaint comes from a particular e-mail domain | `"Internal"` |
 | `settings.apiTransformSourceBasedOnReporterDomainExtensions` | The (comma-seperated) list of e-mail domains to automatically transform the source for | `"@localhost"` |
 | `settings.apiTransformSourceBasedOnReporterExceptions` | Do not transform the source automatically for these e-mail addresses | `"ignore@localhost"` |
 | `settings.apiPdfLogoStaticFile` | Link to PDF logo on local system | `"api/logo-gemeente-amsterdam.svg"` |

@@ -7,15 +7,17 @@ metadata:
     component: cellery-beat
 spec:
   replicas: 1
-  revisionHistoryLimit: 2
   selector:
     matchLabels:
       {{- include "signals-backend.selectorLabels" . | nindent 6 }}
       component: celery-beat
   strategy:
-    type: {{ .Values.deploymentStrategy }}
+    type: Recreate
   template:
     metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-beat
@@ -26,35 +28,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
           args: ["beat", "--app", "signals", "--loglevel", "WARNING", "--pidfile", "/tmp/celerybeat.pid"]
-          env:
-            - name: DJANGO_SETTINGS_MODULE
-              value: signals.settings.production
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: secret-key
-            - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.settings.database.host }}
-            - name: DATABASE_PORT_OVERRIDE
-              value: {{ .Values.settings.database.port | quote }}
-            - name: DATABASE_USER
-              value: {{ .Values.settings.database.username }}
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: database-password
-            - name: DATABASE_NAME
-              value: {{ .Values.settings.database.name }}
-            - name: RABBITMQ_HOST
-              value: {{ .Values.settings.rabbitmq.host }}
-            - name: RABBITMQ_USER
-              value: {{ .Values.settings.rabbitmq.username }}
-            - name: RABBITMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: rabbitmq-password
-            - name: RABBITMQ_VHOST
-              value: {{ .Values.settings.rabbitmq.vhost }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
+            - secretRef:
+                name: {{ template "signals-backend.fullname" . }}

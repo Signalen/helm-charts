@@ -7,7 +7,6 @@ metadata:
     component: cellery-worker
 spec:
   replicas: {{ .Values.workerReplicaCount }}
-  revisionHistoryLimit: 2
   selector:
     matchLabels:
       {{- include "signals-backend.selectorLabels" . | nindent 6 }}
@@ -16,6 +15,9 @@ spec:
     type: {{ .Values.deploymentStrategy }}
   template:
     metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-worker
@@ -26,80 +28,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
           args: ["worker", "--app", "signals", "--loglevel", "WARNING"]
-          env:
-            - name: DJANGO_SETTINGS_MODULE
-              value: signals.settings.production
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: secret-key
-            - name: DWH_MEDIA_ROOT
-              value: /dwh_media
-            - name: DATABASE_HOST_OVERRIDE
-              value: {{ .Values.settings.database.host }}
-            - name: DATABASE_PORT_OVERRIDE
-              value: {{ .Values.settings.database.port | quote }}
-            - name: DATABASE_USER
-              value: {{ .Values.settings.database.username }}
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: database-password
-            - name: DATABASE_NAME
-              value: {{ .Values.settings.database.name }}
-            - name: RABBITMQ_HOST
-              value: {{ .Values.settings.rabbitmq.host }}
-            - name: RABBITMQ_USER
-              value: {{ .Values.settings.rabbitmq.username }}
-            - name: RABBITMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: rabbitmq-password
-            - name: RABBITMQ_VHOST
-              value: {{ .Values.settings.rabbitmq.vhost }}
-            - name: EMAIL_HOST
-              value: {{ .Values.settings.email.hostname }}
-            - name: EMAIL_PORT
-              value: {{ .Values.settings.email.port | quote }}
-            - name: EMAIL_HOST_USER
-              value: {{ .Values.settings.email.username }}
-            - name: EMAIL_HOST_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}
-                  key: email-password
-            - name: EMAIL_USE_TLS
-              value: "{{ if .Values.settings.email.useTLS }}True{{ end }}"
-            - name: EMAIL_USE_SSL
-              value: "{{ if .Values.settings.email.useSSL }}True{{ end }}"
-            {{- if .Values.settings.sigmax.enabled }}
-            - name: SIGMAX_SERVER
-              value: {{ .Values.settings.sigmax.serverUrl }}
-            - name: SIGMAX_AUTH_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "signals-backend.fullname" . }}-sigmax
-                  key: auth-token
-            {{- end }}
-            - name: ELASTICSEARCH_HOST
-              value: {{ .Values.settings.elasticsearch.host }}
-            - name: ELASTICSEARCH_INDEX
-              value: {{ .Values.settings.elasticsearch.index }}
-            - name: ORGANIZATION_NAME
-              value: {{ .Values.settings.organizationName | quote }}
-            - name: DEFAULT_FROM_EMAIL
-              value: {{ .Values.settings.defaultFromEmail | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterSource | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_DOMAIN_EXTENSIONS
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterDomainExtensions | quote }}
-            - name: API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS
-              value: {{ .Values.settings.apiTransformSourceBasedOnReporterExceptions | quote }}
-            - name: API_PDF_LOGO_STATIC_FILE
-              value: {{ .Values.settings.apiPdfLogoStaticFile | quote }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "signals-backend.fullname" . }}
+            - secretRef:
+                name: {{ template "signals-backend.fullname" . }}
           volumeMounts:
             - name: dwh-media
               mountPath: /dwh_media
