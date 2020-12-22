@@ -7,12 +7,12 @@ version: 0.1.0
 dependencies:
   - name: postgresql
     version: ~7.7.2
-    repository: https://kubernetes-charts.storage.googleapis.com
+    repository: https://charts.bitnami.com/bitnami
     tags:
       - postgresql
   - name: rabbitmq
     version: ~6.14.0
-    repository: https://kubernetes-charts.storage.googleapis.com
+    repository: https://charts.bitnami.com/bitnami
     tags:
       - rabbitmq
   - name: elasticsearch
