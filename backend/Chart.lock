@@ -1,12 +1,12 @@
 dependencies:
 - name: postgresql
-  repository: https://kubernetes-charts.storage.googleapis.com
+  repository: https://charts.bitnami.com/bitnami
   version: 7.7.3
 - name: rabbitmq
-  repository: https://kubernetes-charts.storage.googleapis.com
+  repository: https://charts.bitnami.com/bitnami
   version: 6.14.2
 - name: elasticsearch
   repository: https://helm.elastic.co
   version: 6.8.13
-digest: sha256:df84371b3e9008cf94392b8cd101b74eef251c5d5c0cea5df160c0f35202f2f8
-generated: "2020-12-15T15:22:12.948376+01:00"
+digest: sha256:c16420bd8e98a25c44fc5c33061d6d9407971f07bc88c608a8a15863275f9ce8
+generated: "2020-12-22T19:07:54.082297+01:00"
