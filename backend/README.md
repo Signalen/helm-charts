@@ -28,6 +28,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.secretKey` | The secret key of the backend | `change-to-something-secret` |
 | `settings.allowedHosts` | Restrict the allowed hosts of the API | `*` |
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |
+| `settings.environment` | The environment name. Can be acceptance or production. | `"production"` |
 | `settings.organizationName` | The name of the organization | `"Signalen"` |
 | `settings.defaultFromEmail` | The default from e-mail | `"webmaster@localhost"` |
 | `settings.apiTransformSourceBasedOnReporter` | Transform the source of a complaint when a complaint comes from a particular e-mail domain | `false` |
@@ -41,6 +42,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.email.port` | The port of the SMTP server | `""` |
 | `settings.email.useTLS` | Use TLS while connecting to the SMTP server | `false` |
 | `settings.email.useSSL` | Use SSL while connecting to the SMTP server | `false` |
+| `settings.feedbackEnvFeMapping` | The URL of the frontend | `https://meldingen.amsterdam.nl` |
 | `settings.classificationService` | Use SSL while connecting to the SMTP server | `https://api.data.amsterdam.nl/signals_mltool` |
 | `sigmax.enabled` | Enable the connection with Sigmax City Control | `false` |
 | `sigmax.serverUrl` | The server URL of Sigmax | `` |
