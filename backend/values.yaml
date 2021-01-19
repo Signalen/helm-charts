@@ -54,6 +54,8 @@ settings:
   jwksUrl: ""
   userIdField: "sub"
 
+  environment: "production"
+
   organizationName: "Signalen"
   defaultFromEmail: "webmaster@localhost"
 
@@ -90,6 +92,7 @@ settings:
     useSSL: false
 
   datapuntApiUrl: https://api.data.amsterdam.nl/
+  feedbackEnvFeMapping: https://meldingen.amsterdam.nl
 
   classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
 

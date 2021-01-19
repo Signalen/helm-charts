@@ -31,6 +31,8 @@ data:
   EMAIL_USE_SSL: {{ if .Values.settings.email.useSSL }}"True"{{ else }}"False"{{ end }}
   ELASTICSEARCH_HOST: {{ .Values.settings.elasticsearch.host | quote }}
   ELASTICSEARCH_INDEX: {{ .Values.settings.elasticsearch.index | quote }}
+  ENVIRONMENT: {{ .Values.settings.environment | quote }}
+  FEEDBACK_ENV_FE_MAPPING: {{ .Values.settings.feedbackEnvFeMapping | quote }}
   JWKS_URL: {{ .Values.settings.jwksUrl | quote }}
   ORGANIZATION_NAME: {{ .Values.settings.organizationName | quote }}
   PUB_JWKS: {{ .Values.settings.pubJwks | quote }}
