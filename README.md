@@ -34,20 +34,20 @@ Dex has a lot of benefits when connected to an Identity Provider [using connecto
 
 ## Install the charts
 
-First clone this repository with the Helm charts and initialize the backend chart:
+First configure the Helm repository:
 
 ```bash
-git clone https://github.com/Signalen/helm-charts.git
-(cd charts/backend/ && helm dependency update)
+helm repo add signalen https://signalen.github.io/helm-charts/
+helm repo update
 ```
 
 Then install the backend chart:
 
 ```bash
 helm upgrade --install \
-  signals-backend ./backend \
+  signalen-backend signalen/backend \
   --create-namespace \
-  --namespace signals \
+  --namespace signalen \
   --set "settings.allowedHosts=api.signals.example.com" \
   --set "settings.defaultPdokMunicipalities=Amsterdam" \
   --set "settings.jwksUrl=https://dex.signals.example.com" \
@@ -61,22 +61,22 @@ And install the frontend chart:
 
 ```bash
 helm upgrade --install \
-  signals-frontend ./frontend \
+  signalen-frontend signalen/frontend \
   --create-namespace \
-  --namespace signals \
+  --namespace signalen \
   --set "oidc.authEndpoint=https://dex.signals.example.com/auth" \
   --set "config.apiBaseUrl=https://api.signals.example.com/signals" \
   --set "ingress.enabled=true" \
   --set "ingress.host=signals.example.com"
 ```
 
-And install the classification chart with:
+And install the classification chart:
 
 ```bash
 helm upgrade --install \
-  signals-classification ./classification \
+  signalen-classification signalen/classification \
   --create-namespace \
-  --namespace signals \
+  --namespace signalen \
   --set "signalsCategoryUrl=https://api.signals.example.com/signals/v1/public/terms" \
   --set "ingress.enabled=true" \
   --set "ingress.host=classification.signals.example.com"

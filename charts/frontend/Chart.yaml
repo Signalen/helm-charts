@@ -1,5 +1,5 @@
 apiVersion: v2
-name: signals-frontend
+name: frontend
 description: The web frontend for the Signals application
 type: application
 version: 2.1.0
