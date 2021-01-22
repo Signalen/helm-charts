@@ -87,15 +87,15 @@ helm upgrade --install \
 To delete the charts:
 
 ```bash
-helm delete --namespace signals signals-frontend
-helm delete --namespace signals signals-backend
-helm delete --namespace signals signals-classification
+helm delete --namespace signalen signalen-frontend
+helm delete --namespace signalen signalen-backend
+helm delete --namespace signalen signalen-classification
 ```
 
 And finally remove the namespace:
 
 ```bash
-kubectl delete namespace signals
+kubectl delete namespace signalen
 ```
 
 ## Configuration
