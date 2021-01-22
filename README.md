@@ -38,7 +38,7 @@ First clone this repository with the Helm charts and initialize the backend char
 
 ```bash
 git clone https://github.com/Signalen/helm-charts.git
-(cd backend/ && helm dependency update)
+(cd charts/backend/ && helm dependency update)
 ```
 
 Then install the backend chart:
@@ -102,6 +102,6 @@ kubectl delete namespace signals
 
 Consult the documentation of the specific charts for an overview of all configuration options:
 
-- [backend](./backend)
-- [frontend](./frontend)
-- [classification](./classification)
+- [backend](./charts/backend)
+- [frontend](./charts/frontend)
+- [classification](./charts/classification)
