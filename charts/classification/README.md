@@ -12,6 +12,10 @@ The classification service expects a trained machine learning model in the folde
 | `image.tag` | The tag of the Docker image | `latest` |
 | `signalsCategoryUrl` | This prefix that will be added to every category slug | `http://api.signals.example.com/signals/v1/public/terms` |
 | `replicaCount` | The number of API replicas | `1` |
+| `persistence.enabled` | Enable persistence | `true` |
+| `persistence.size` | Specify the size of the PVC | `1Gi` |
+| `persistence.existingClaim` | Name of an existing PVC to use | `null` |
+| `persistence.accessModes` | The accessModes of the PVC | `{ ReadWriteOnce }` |
 | `ingress.enabled` | Expose the API through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
 | `ingress.host` | The host of the API | `""` |
