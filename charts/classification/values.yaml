@@ -46,6 +46,8 @@ persistence:
   enabled: true
   size: 1Gi
   existingClaim: null
+  accessModes:
+    - ReadWriteOnce
 
 resources: {}
 
