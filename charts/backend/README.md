@@ -25,6 +25,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `persistence.datawarehouse.size` | Specify the size of the datawarehouse PVC | `1Gi` |
 | `persistence.datawarehouse.existingClaim` | Name of an existing PVC to use for datawarehouse | `null` |
 | `persistence.datawarehouse.accessModes` | The accessModes of datawarehouse | `{ ReadWriteMany }` |
+| `existingSecret` | Name of an existing secret to avoid managing secrets through Helm | `null` |
 | `settings.secretKey` | The secret key of the backend | `change-to-something-secret` |
 | `settings.allowedHosts` | Restrict the allowed hosts of the API | `*` |
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |

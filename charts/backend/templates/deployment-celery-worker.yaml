@@ -32,7 +32,7 @@ spec:
             - configMapRef:
                 name: {{ template "signals-backend.fullname" . }}
             - secretRef:
-                name: {{ template "signals-backend.fullname" . }}
+                name: {{ if .Values.existingSecret }}{{ .Values.existingSecret }}{{ else }}{{ template "signals-backend.fullname" . }}{{ end }}
           volumeMounts:
             - name: dwh-media
               mountPath: /dwh_media
@@ -40,7 +40,7 @@ spec:
         - name: dwh-media
         {{- if .Values.persistence.datawarehouse.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.datawarehouse.existingClaim }}{{ .Values.persistence.datawarehouse.existingClaim }}{{- else }}{{ template "signals-backend.fullname" . }}-datawarehouse{{- end }}
+            claimName: {{ if .Values.persistence.datawarehouse.existingClaim }}{{ .Values.persistence.datawarehouse.existingClaim }}{{ else }}{{ template "signals-backend.fullname" . }}-datawarehouse{{ end }}
         {{- else }}
           emptyDir: {}
         {{- end }}
