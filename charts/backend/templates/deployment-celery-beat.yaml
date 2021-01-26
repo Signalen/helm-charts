@@ -32,4 +32,4 @@ spec:
             - configMapRef:
                 name: {{ template "signals-backend.fullname" . }}
             - secretRef:
-                name: {{ template "signals-backend.fullname" . }}
+                name: {{ if .Values.existingSecret }}{{ .Values.existingSecret }}{{ else }}{{ template "signals-backend.fullname" . }}{{ end }}
