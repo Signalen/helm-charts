@@ -2,6 +2,31 @@ apiVersion: v1
 entries:
   backend:
   - apiVersion: v2
+    created: "2021-01-26T11:56:12.223814452Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - postgresql
+      version: ~7.7.2
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - rabbitmq
+      version: ~6.14.0
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      tags:
+      - elasticsearch
+      version: ~6.8.0
+    description: The API for the Signals application
+    digest: e155947470acc021bac54dfb136f1227cca1916aec4a51a131c93bc04c0fbe79
+    name: backend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/backend-2.3.0/backend-2.3.0.tgz
+    version: 2.3.0
+  - apiVersion: v2
     created: "2021-01-25T21:01:00.49513608Z"
     dependencies:
     - name: postgresql
@@ -53,6 +78,15 @@ entries:
     version: 2.1.0
   classification:
   - apiVersion: v2
+    created: "2021-01-26T11:56:12.529280354Z"
+    description: Machine learning prediction API
+    digest: c643f0a3f8f850c8c7b1d1d8fdc1c10a8d67ae41212de308fa0797b2765a8f9c
+    name: classification
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/classification-2.3.0/classification-2.3.0.tgz
+    version: 2.3.0
+  - apiVersion: v2
     created: "2021-01-25T21:01:00.648137746Z"
     description: Machine learning prediction API
     digest: 682f7c44924715916e38e35357b03ddca47d51ef43fc4a2cf28fba009d537395
@@ -71,6 +105,15 @@ entries:
     - https://github.com/Signalen/helm-charts/releases/download/classification-2.1.0/classification-2.1.0.tgz
     version: 2.1.0
   frontend:
+  - apiVersion: v2
+    created: "2021-01-26T11:56:12.835626762Z"
+    description: The web frontend for the Signals application
+    digest: 39d18f627c534a67e80c6a8c1f17f7279cefa70b1cc738f0fce27c440548039d
+    name: frontend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/frontend-2.3.0/frontend-2.3.0.tgz
+    version: 2.3.0
   - apiVersion: v2
     created: "2021-01-25T21:01:00.81596587Z"
     description: The web frontend for the Signals application
