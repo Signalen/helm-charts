@@ -13,6 +13,7 @@ data:
   API_TRANSFORM_SOURCE_BASED_ON_REPORTER_EXCEPTIONS: {{ .Values.settings.apiTransformSourceBasedOnReporterExceptions | quote }}
   API_TRANSFORM_SOURCE_BASED_ON_REPORTER_SOURCE: {{ .Values.settings.apiTransformSourceBasedOnReporterSource | quote }}
   {{- end }}
+  CELERY_EMAIL_BACKEND: {{ .Values.settings.celeryEmailBackend | quote }}
   DATABASE_HOST_OVERRIDE: {{ .Values.settings.database.host | quote }}
   DATABASE_PORT_OVERRIDE: {{ .Values.settings.database.port | quote }}
   DATABASE_USER: {{ .Values.settings.database.username | quote }}

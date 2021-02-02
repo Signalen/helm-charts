@@ -93,6 +93,8 @@ settings:
     useTLS: false
     useSSL: false
 
+  celeryEmailBackend: django.core.mail.backends.smtp.EmailBackend
+
   datapuntApiUrl: https://api.data.amsterdam.nl/
   feedbackEnvFeMapping: https://meldingen.amsterdam.nl
 
