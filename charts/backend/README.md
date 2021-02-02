@@ -43,6 +43,9 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.email.port` | The port of the SMTP server | `""` |
 | `settings.email.useTLS` | Use TLS while connecting to the SMTP server | `false` |
 | `settings.email.useSSL` | Use SSL while connecting to the SMTP server | `false` |
+| `settings.email.restEndpoint` | The REST endpoint when using REST backend | `""` |
+| `settings.email.restEndpointClientCert` | The client certificate when using REST backend | `""` |
+| `settings.email.restEndpointClientKey` | The client key when using REST backend | `""` |
 | `settings.celeryEmailBackend` | The e-mail backend to use (SMTP or REST) | `django.core.mail.backends.smtp.EmailBackend` |
 | `settings.feedbackEnvFeMapping` | The URL of the frontend | `https://meldingen.amsterdam.nl` |
 | `settings.classificationService` | Use SSL while connecting to the SMTP server | `https://api.data.amsterdam.nl/signals_mltool` |

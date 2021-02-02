@@ -93,6 +93,10 @@ settings:
     useTLS: false
     useSSL: false
 
+    restEndpoint: ""
+    restEndpointClientCert: ""
+    restEndpointClientKey: ""
+
   celeryEmailBackend: django.core.mail.backends.smtp.EmailBackend
 
   datapuntApiUrl: https://api.data.amsterdam.nl/
