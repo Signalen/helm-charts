@@ -60,6 +60,9 @@ spec:
               mountPath: /media
             - name: dwh-media
               mountPath: /dwh_media
+{{- if ne (len .Values.extraVolumeMounts) 0 }}
+{{ toYaml .Values.extraVolumeMounts | indent 12 }}
+{{- end }}
           livenessProbe:
             httpGet:
               path: /status/health
@@ -91,3 +94,6 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
+{{- if ne (len .Values.extraVolumes) 0 }}
+{{ toYaml .Values.extraVolumes | indent 8 }}
+{{- end }}

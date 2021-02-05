@@ -47,6 +47,9 @@ persistence:
 
 existingSecret: null # Refer to existing secret to avoid managing secrets through Helm
 
+extraVolumes: []
+extraVolumeMounts: []
+
 settings:
   secretKey: "change-to-something-secret"
   allowedHosts: "*"
