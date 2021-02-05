@@ -30,6 +30,7 @@ data:
   EMAIL_HOST_USER: {{ .Values.settings.email.username | quote }}
   EMAIL_REST_ENDPOINT: {{ .Values.settings.email.restEndpoint | quote }}
   EMAIL_REST_ENDPOINT_CLIENT_CERT: {{ .Values.settings.email.restEndpointClientCert | quote }}
+  EMAIL_REST_ENDPOINT_CLIENT_KEY: {{ .Values.settings.email.restEndpointClientKey | quote }}
   EMAIL_USE_TLS: {{ if .Values.settings.email.useTLS }}"True"{{ else }}"False"{{ end }}
   EMAIL_USE_SSL: {{ if .Values.settings.email.useSSL }}"True"{{ else }}"False"{{ end }}
   ELASTICSEARCH_HOST: {{ .Values.settings.elasticsearch.host | quote }}
