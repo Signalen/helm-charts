@@ -107,6 +107,9 @@ settings:
 
   classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
 
+  enablePublicGeoSignalEndpoint: false
+  allowInvalidAddressAsUnverified: true
+
   sigmax:
     enabled: false
     serverUrl: http://sigmax.sigmax

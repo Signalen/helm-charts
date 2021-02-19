@@ -6,6 +6,7 @@ metadata:
     {{- include "signals-backend.labels" . | nindent 4 }}
 data:
   ALLOWED_HOSTS: {{ .Values.settings.allowedHosts | quote }}
+  ALLOW_INVALID_ADDRESS_AS_UNVERIFIED: {{ if .Values.settings.allowInvalidAddressAsUnverified }}"True"{{ else }}"False"{{ end }}
   API_PDF_LOGO_STATIC_FILE: {{ .Values.settings.apiPdfLogoStaticFile | quote }}
   API_TRANSFORM_SOURCE_BASED_ON_REPORTER: {{ if .Values.settings.apiTransformSourceBasedOnReporter }}"True"{{ else }}"False"{{ end }}
   {{- if .Values.settings.apiTransformSourceBasedOnReporter }}
@@ -35,6 +36,7 @@ data:
   EMAIL_USE_SSL: {{ if .Values.settings.email.useSSL }}"True"{{ else }}"False"{{ end }}
   ELASTICSEARCH_HOST: {{ .Values.settings.elasticsearch.host | quote }}
   ELASTICSEARCH_INDEX: {{ .Values.settings.elasticsearch.index | quote }}
+  ENABLE_PUBLIC_GEO_SIGNAL_ENDPOINT: {{ if .Values.settings.enablePublicGeoSignalEndpoint }}"True"{{ else }}"False"{{ end }}
   ENVIRONMENT: {{ .Values.settings.environment | quote }}
   FEEDBACK_ENV_FE_MAPPING: {{ .Values.settings.feedbackEnvFeMapping | quote }}
   JWKS_URL: {{ .Values.settings.jwksUrl | quote }}
