@@ -19,12 +19,7 @@ service:
 
 ingress:
   enabled: true
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    ingress.kubernetes.io/hsts-include-subdomains: "true"
-    ingress.kubernetes.io/hsts-max-age: "315360000"
-    ingress.kubernetes.io/hsts-preload: "true"
-    ingress.kubernetes.io/ssl-redirect: "true"
+  annotations: {}
   host: api.signals.local
   tls:
     - secretName: backend-tls
