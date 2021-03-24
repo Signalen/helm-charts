@@ -27,7 +27,11 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
-          args: ["worker", "--app", "signals", "--loglevel", "WARNING"]
+          args:
+            - 'worker'
+            - '--app=signals'
+            - '--loglevel=WARNING'
+            - '--concurrency={{ .Values.celery.concurrency }}'
           envFrom:
             - configMapRef:
                 name: {{ template "signals-backend.fullname" . }}

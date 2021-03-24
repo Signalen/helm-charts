@@ -6,6 +6,13 @@ tags:
 replicaCount: 1
 workerReplicaCount: 1
 
+uwsgi:
+  processes: 4
+  threads: 2
+
+celery:
+  concurrency: 2
+
 deploymentStrategy: RollingUpdate
 
 image:

@@ -17,6 +17,9 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `image.tag` | The tag of the Docker image | `latest` |
 | `replicaCount` | The number of API replicas | `1` |
 | `workerReplicaCount` | The number of background worker replicas | `1` |
+| `uwsgi.processes` | The number of uWSGI processes | `4` |
+| `uwsgi.threads` | The number of uWSGI threads | `2` |
+| `celery.concurrency` | The number of Celery concurrent child processes | `2` |
 | `persistence.media.enabled` | Enable persistence of media | `true` |
 | `persistence.media.size` | Specify the size of the media PVC | `1Gi` |
 | `persistence.media.existingClaim` | Name of an existing PVC to use | `null` |
