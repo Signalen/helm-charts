@@ -253,6 +253,15 @@ entries:
     version: 2.1.0
   classification:
   - apiVersion: v2
+    created: "2021-03-24T16:22:21.508688709Z"
+    description: Machine learning prediction API
+    digest: 2a0be443eb17731da8b600c0fa373815bdd771462bcb84e4562d78322861ba84
+    name: classification
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/classification-2.5.0/classification-2.5.0.tgz
+    version: 2.5.0
+  - apiVersion: v2
     created: "2021-03-04T10:55:16.980908137Z"
     description: Machine learning prediction API
     digest: ce1db9868df98e651814c4283e6d769c3aebb600d2be9807a253301df9570156
@@ -334,6 +343,15 @@ entries:
     - https://github.com/Signalen/helm-charts/releases/download/classification-2.1.0/classification-2.1.0.tgz
     version: 2.1.0
   frontend:
+  - apiVersion: v2
+    created: "2021-03-24T16:22:21.813358775Z"
+    description: The web frontend for the Signals application
+    digest: 64d1d87957260772adcd42a6f1f7e56780f0d0216138b10678b7521ce5e8898a
+    name: frontend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/frontend-2.5.0/frontend-2.5.0.tgz
+    version: 2.5.0
   - apiVersion: v2
     created: "2021-03-04T10:55:17.089196373Z"
     description: The web frontend for the Signals application
