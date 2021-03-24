@@ -2,6 +2,31 @@ apiVersion: v1
 entries:
   backend:
   - apiVersion: v2
+    created: "2021-03-24T14:58:05.288957858Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - postgresql
+      version: ~7.7.2
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - rabbitmq
+      version: ~6.14.0
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      tags:
+      - elasticsearch
+      version: ~6.8.0
+    description: The API for the Signals application
+    digest: 6dcd33aba2e8f09fa98724e6279d7efc10e3eca93b1b21c70f358d222a16293a
+    name: backend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/backend-2.5.0/backend-2.5.0.tgz
+    version: 2.5.0
+  - apiVersion: v2
     created: "2021-03-04T10:55:16.872715402Z"
     dependencies:
     - name: postgresql
