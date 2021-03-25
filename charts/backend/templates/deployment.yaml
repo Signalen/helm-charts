@@ -28,8 +28,11 @@ spec:
         - name: migrate
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/app/manage.py"]
-          args: ["migrate"]
+          command:
+            - /usr/local/bin/python
+          args:
+            - '/app/manage.py'
+            - 'migrate'
           envFrom:
             - configMapRef:
                 name: {{ template "signals-backend.fullname" . }}
