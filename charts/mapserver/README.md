@@ -18,4 +18,4 @@ This Helm chart can be used to install [Mapserver](https://www.mapserver.org/).
 | `ingress.annotations` | Additional annotations on the ingress | `{}` |
 | `ingress.hosts` | The hosts of the ingress | `"[mapserver.signals.local]"` |
 
-Check [values.yaml](./values.yaml) for all the possible configuration options.
+Check [values.yaml](./values.yaml) for all the possible configuration options. For some example data see [./example-data](./example-data).
