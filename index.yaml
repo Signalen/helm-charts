@@ -433,4 +433,14 @@ entries:
     urls:
     - https://github.com/Signalen/helm-charts/releases/download/frontend-2.1.0/frontend-2.1.0.tgz
     version: 2.1.0
+  mapserver:
+  - apiVersion: v2
+    created: "2021-03-25T18:29:15.769236028Z"
+    description: A chart that deploys Mapserver
+    digest: 68a63e1966ce88528d911fd1b941aaaa58dfcaa54c7083a9fed3b08e01812e53
+    name: mapserver
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/mapserver-2.5.0/mapserver-2.5.0.tgz
+    version: 2.5.0
 generated: "2021-01-22T12:56:38.135912551Z"
