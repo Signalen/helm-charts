@@ -20,6 +20,8 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
+podAnnotations: {}
+
 service:
   type: ClusterIP
   port: 80
@@ -74,21 +76,21 @@ settings:
   apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
 
   database:
-    host: signals-backend-postgresql
+    host: signalen-backend-postgresql
     port: 5432
-    username: signals
-    password: signals
-    name: signals
+    username: postgres
+    password: signalen
+    name: signalen
 
   rabbitmq:
-    host: signals-backend-rabbitmq
-    username: signals
-    password: signals
+    host: signalen-backend-rabbitmq
+    username: signalen
+    password: signalen
     vhost: ""
 
   elasticsearch:
     host: elasticsearch-master:9200 # first part corresponds with elasticsearch.clusterName
-    index: signals
+    index: signalen
 
   email:
     hostname: mailhog
@@ -121,18 +123,13 @@ settings:
 ## PostgreSQL subchart ##
 #########################
 postgresql:
-  image:
-    repository: amsterdam/postgres11
-    tag: latest
-
   persistence:
-    enabled: true
+    enabled: false
     size: 1Gi
     existingClaim: null
 
-  postgresqlDatabase: signals
-  postgresqlUsername: signals
-  postgresqlPassword: signals
+  postgresqlDatabase: signalen
+  postgresqlPassword: signalen
 
 #######################
 ## RabbitMQ subchart ##
@@ -142,8 +139,8 @@ rabbitmq:
     tag: "3.8"
 
   rabbitmq:
-    username: signals
-    password: signals
+    username: signalen
+    password: signalen
 
   persistence:
     enabled: true

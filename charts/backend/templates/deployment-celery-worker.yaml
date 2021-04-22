@@ -18,6 +18,9 @@ spec:
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         {{- include "signals-backend.labels" . | nindent 8 }}
         component: celery-worker
@@ -28,8 +31,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
           args:
-            - 'worker'
             - '--app=signals'
+            - 'worker'
             - '--loglevel=WARNING'
             - '--concurrency={{ .Values.celery.concurrency }}'
           envFrom:
