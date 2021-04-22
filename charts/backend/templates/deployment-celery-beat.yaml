@@ -27,7 +27,11 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
-          args: ["beat", "--app", "signals", "--loglevel", "WARNING", "--pidfile", "/tmp/celerybeat.pid"]
+          args:
+            - '--app=signals'
+            - 'beat'
+            - '--loglevel=WARNING'
+            - '--pidfile=/tmp/celerybeat.pid'
           envFrom:
             - configMapRef:
                 name: {{ template "signals-backend.fullname" . }}
