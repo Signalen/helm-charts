@@ -564,6 +564,15 @@ entries:
     version: 2.1.0
   mapserver:
   - apiVersion: v2
+    created: "2021-07-01T13:45:48.765521798Z"
+    description: A chart that deploys Mapserver
+    digest: 7893b28bb44a28ec4da6130d611e33b84b7377969f4dd84407ce2c002a1def2b
+    name: mapserver
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/mapserver-2.6.1/mapserver-2.6.1.tgz
+    version: 2.6.1
+  - apiVersion: v2
     created: "2021-04-22T20:20:01.08246279Z"
     description: A chart that deploys Mapserver
     digest: 15fb5d62889e85f7adcedf396f79c4407e77de4d7034bad1cd6196558342af5c
