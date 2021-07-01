@@ -108,6 +108,7 @@ settings:
 
   datapuntApiUrl: https://api.data.amsterdam.nl/
   feedbackEnvFeMapping: https://meldingen.amsterdam.nl
+  frontendUrl: ""
 
   classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
 

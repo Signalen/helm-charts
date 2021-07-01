@@ -39,6 +39,7 @@ data:
   ENABLE_PUBLIC_GEO_SIGNAL_ENDPOINT: {{ if .Values.settings.enablePublicGeoSignalEndpoint }}"True"{{ else }}"False"{{ end }}
   ENVIRONMENT: {{ .Values.settings.environment | quote }}
   FEEDBACK_ENV_FE_MAPPING: {{ .Values.settings.feedbackEnvFeMapping | quote }}
+  FRONTEND_URL: {{ .Values.settings.frontendUrl | quote }}
   JWKS_URL: {{ .Values.settings.jwksUrl | quote }}
   ORGANIZATION_NAME: {{ .Values.settings.organizationName | quote }}
   RABBITMQ_HOST: {{ .Values.settings.rabbitmq.host | quote }}
