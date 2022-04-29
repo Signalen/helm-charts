@@ -51,6 +51,7 @@ spec:
             - '--master'
             - '--http=:8000'
             - '--module=signals.wsgi:application'
+            - '--buffer-size=8192'
             - '--processes={{ .Values.uwsgi.processes }}'
             - '--threads={{ .Values.uwsgi.threads }}'
             - '--static-map=/signals/static=/static'
