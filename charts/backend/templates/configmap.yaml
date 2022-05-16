@@ -38,7 +38,6 @@ data:
   ELASTICSEARCH_INDEX: {{ .Values.settings.elasticsearch.index | quote }}
   ENABLE_PUBLIC_GEO_SIGNAL_ENDPOINT: {{ if .Values.settings.enablePublicGeoSignalEndpoint }}"True"{{ else }}"False"{{ end }}
   ENVIRONMENT: {{ .Values.settings.environment | quote }}
-  FEEDBACK_ENV_FE_MAPPING: {{ .Values.settings.feedbackEnvFeMapping | quote }}
   FRONTEND_URL: {{ .Values.settings.frontendUrl | quote }}
   JWKS_URL: {{ .Values.settings.jwksUrl | quote }}
   ORGANIZATION_NAME: {{ .Values.settings.organizationName | quote }}
@@ -51,3 +50,4 @@ data:
   SIGNALS_ML_TOOL_ENDPOINT: {{ .Values.settings.classificationEndpoint | quote }}
   USER_ID_FIELD: {{ .Values.settings.userIdField | quote }}
   USER_ID_FIELDS: {{ .Values.settings.userIdField | quote }}
+  EXCLUDED_PERMISSIONS_IN_RESPONSE: {{ .Values.settings.excludedPermissionsInResponses }}

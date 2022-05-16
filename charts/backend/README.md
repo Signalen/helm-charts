@@ -52,11 +52,11 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.email.restEndpointClientCert` | The path to the client certificate when using REST backend | `""` |
 | `settings.email.restEndpointClientKey` | The path to the client key when using REST backend | `""` |
 | `settings.celeryEmailBackend` | The e-mail backend to use (SMTP or REST) | `django.core.mail.backends.smtp.EmailBackend` |
-| `settings.feedbackEnvFeMapping` | The URL of the frontend (deprecated) | `https://meldingen.amsterdam.nl` |
 | `settings.frontendUrl` | The URL of the frontend | `""` |
 | `settings.classificationEndpoint` | Use SSL while connecting to the SMTP server | `https://api.data.amsterdam.nl/signals_mltool` |
 | `settings.enablePublicGeoSignalEndpoint` | Enable public endpoint for viewing Signals | `false` |
 | `settings.allowInvalidAddressAsUnverified` | Allow a backoffice employee to enter an unknown address | `true` |
+| `settings.excludedPermissionsInResponses` | sia_ permissions to hide from backoffice settings page | `sia_delete_attachment_of_normal_signal, sia_delete_attachment_of_parent_signal, sia_delete_attachment_of_child_signal, sia_delete_attachment_of_other_user` |
 | `sigmax.enabled` | Enable the connection with Sigmax City Control | `false` |
 | `sigmax.serverUrl` | The server URL of Sigmax | `` |
 | `sigmax.authToken` | The token to authenticate with Sigmax | `` |
