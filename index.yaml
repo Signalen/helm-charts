@@ -2,6 +2,31 @@ apiVersion: v1
 entries:
   backend:
   - apiVersion: v2
+    created: "2022-05-17T07:08:01.716991777Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - postgresql
+      version: ~7.7.2
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - rabbitmq
+      version: ~6.14.0
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      tags:
+      - elasticsearch
+      version: ~6.8.0
+    description: The API for the Signals application
+    digest: c205ddf2f26cdde93e8539ac52f1c1a37ecbe39c5b089ab4902ee554fa485311
+    name: backend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/backend-2.6.3/backend-2.6.3.tgz
+    version: 2.6.3
+  - apiVersion: v2
     created: "2022-04-29T09:28:03.187559271Z"
     dependencies:
     - name: postgresql
@@ -353,6 +378,15 @@ entries:
     version: 2.1.0
   classification:
   - apiVersion: v2
+    created: "2022-05-17T07:08:01.8374067Z"
+    description: Machine learning prediction API
+    digest: f2b00dd5bbd490c31a536014b2db74da7b31143d7a8ceac218d107ce8edaee67
+    name: classification
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/classification-2.6.3/classification-2.6.3.tgz
+    version: 2.6.3
+  - apiVersion: v2
     created: "2022-04-29T09:28:03.412760056Z"
     description: Machine learning prediction API
     digest: 9097f7b1ccefa4369305bedb4b3a860b1850a4e97bb3861340a7cf205b0dd355
@@ -480,6 +514,15 @@ entries:
     version: 2.1.0
   frontend:
   - apiVersion: v2
+    created: "2022-05-17T07:08:01.980200255Z"
+    description: The web frontend for the Signals application
+    digest: 14db74df0ef5cd358d7ffe0042e31b8fce0b1b72868d4e858f7ae20b7feac0a9
+    name: frontend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/frontend-2.6.3/frontend-2.6.3.tgz
+    version: 2.6.3
+  - apiVersion: v2
     created: "2022-04-29T09:28:07.486539448Z"
     description: The web frontend for the Signals application
     digest: 54db87f376e1a058245e845f74f79dbacbcba3a6c95fe40210d8ddc9da39794f
@@ -606,6 +649,15 @@ entries:
     - https://github.com/Signalen/helm-charts/releases/download/frontend-2.1.0/frontend-2.1.0.tgz
     version: 2.1.0
   mapserver:
+  - apiVersion: v2
+    created: "2022-05-17T07:08:02.139093821Z"
+    description: A chart that deploys Mapserver
+    digest: 5367777d962596a98a1d18d229e762043dfdeb46d0d006eee8bad920908d5c35
+    name: mapserver
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/mapserver-2.6.3/mapserver-2.6.3.tgz
+    version: 2.6.3
   - apiVersion: v2
     created: "2022-04-29T09:28:07.693456569Z"
     description: A chart that deploys Mapserver
