@@ -74,6 +74,12 @@ settings:
   apiTransformSourceBasedOnReporterDomainExtensions: "@localhost"
   apiTransformSourceBasedOnReporterExceptions: "ignore@localhost"
 
+  excludedPermissionsInResponses: >-
+    sia_delete_attachment_of_normal_signal,
+    sia_delete_attachment_of_parent_signal,
+    sia_delete_attachment_of_child_signal,
+    sia_delete_attachment_of_other_user
+
   apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
 
   database:
@@ -108,8 +114,7 @@ settings:
   celeryEmailBackend: django.core.mail.backends.smtp.EmailBackend
 
   datapuntApiUrl: https://api.data.amsterdam.nl/
-  feedbackEnvFeMapping: https://meldingen.amsterdam.nl
-  frontendUrl: ""
+  frontendUrl: ""  # URL pointing to Signalen frontend (back office)
 
   classificationEndpoint: https://api.data.amsterdam.nl/signals_mltool
 
