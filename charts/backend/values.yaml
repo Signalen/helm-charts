@@ -81,6 +81,8 @@ settings:
     sia_delete_attachment_of_other_user
 
   apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
+  systemMailFeedbackReceivedEnabled: false
+  reporterMailHandledNegativeContactEnabled: false
 
   database:
     host: signalen-backend-postgresql
