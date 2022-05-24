@@ -17,7 +17,7 @@ deploymentStrategy: RollingUpdate
 
 image:
   repository: signalen/backend
-  tag: latest
+  tag: ""
   pullPolicy: IfNotPresent
 
 podAnnotations: {}
