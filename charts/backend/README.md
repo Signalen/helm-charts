@@ -65,6 +65,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `sigmax.authToken` | The token to authenticate with Sigmax | `` |
 | `ingress.enabled` | Expose the API through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
-| `ingress.host` | The host of the API | `""` |
+| `ingress.hosts` | The hosts of the ingress | `{}` |
+| `ingress.tls` | The TLS settings of the ingress | `{}` |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options.

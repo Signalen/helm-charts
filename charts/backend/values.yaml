@@ -28,9 +28,16 @@ service:
 
 ingress:
   enabled: true
+  className: ""
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: 8m
-  host: api.signals.local
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: api.signals.local
+      paths:
+        - path: /signals
+          pathType: ImplementationSpecific
   tls:
     - secretName: backend-tls
       hosts:

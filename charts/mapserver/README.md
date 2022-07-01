@@ -16,6 +16,7 @@ This Helm chart can be used to install [Mapserver](https://www.mapserver.org/).
 | `persistence.accessModes` | The accessModes of the PVC | `{ ReadWriteOnce }` |
 | `ingress.enabled` | Expose through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the ingress | `{}` |
-| `ingress.hosts` | The hosts of the ingress | `{ mapserver.signals.local }` |
+| `ingress.hosts` | The hosts of the ingress | `{}` |
+| `ingress.tls` | The TLS settings of the ingress | `{}` |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options. For some example data see [./example-data](./example-data).

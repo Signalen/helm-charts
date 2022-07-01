@@ -54,7 +54,7 @@ helm upgrade --install \
   --set "settings.userIdField=email" \
   --set "settings.classificationEndpoint=https://classification.signals.example.com/signals_mltool" \
   --set "ingress.enabled=true" \
-  --set "ingress.host=api.signals.example.com"
+  --set "ingress.hosts[0]=api.signals.example.com"
 ```
 
 And install the frontend chart:
@@ -67,7 +67,7 @@ helm upgrade --install \
   --set "oidc.authEndpoint=https://dex.signals.example.com/auth" \
   --set "config.apiBaseUrl=https://api.signals.example.com/signals" \
   --set "ingress.enabled=true" \
-  --set "ingress.host=signals.example.com"
+  --set "ingress.hosts[0]=signals.example.com"
 ```
 
 And install the classification chart:
@@ -79,7 +79,7 @@ helm upgrade --install \
   --namespace signalen \
   --set "signalsCategoryUrl=https://api.signals.example.com/signals/v1/public/terms" \
   --set "ingress.enabled=true" \
-  --set "ingress.host=classification.signals.example.com"
+  --set "ingress.hosts[0]=classification.signals.example.com"
 ```
 
 ## Uninstall the charts
