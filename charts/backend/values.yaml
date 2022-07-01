@@ -83,6 +83,7 @@ settings:
   apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
   systemMailFeedbackReceivedEnabled: false
   reporterMailHandledNegativeContactEnabled: false
+  signalHistoryLogEnabled: false
 
   database:
     host: signalen-backend-postgresql
