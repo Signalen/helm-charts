@@ -133,22 +133,21 @@ settings:
 ## PostgreSQL subchart ##
 #########################
 postgresql:
-  persistence:
-    enabled: false
-    size: 1Gi
-    existingClaim: null
+  auth:
+    postgresPassword: signalen
+    database: signalen
 
-  postgresqlDatabase: signalen
-  postgresqlPassword: signalen
+  primary:
+    persistence:
+      enabled: false
+      size: 1Gi
+      existingClaim: null
 
 #######################
 ## RabbitMQ subchart ##
 #######################
 rabbitmq:
-  image:
-    tag: "3.8"
-
-  rabbitmq:
+  auth:
     username: signalen
     password: signalen
 
