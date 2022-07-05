@@ -12,6 +12,7 @@ This Helm chart contains the Signalen web frontend.
 | `config` | The configuration of the frontend. For all options see [environment.conf.json](https://github.com/Signalen/frontend/blob/develop/environment.conf.json) | `{}` |
 | `ingress.enabled` | Expose the API through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
-| `ingress.host` | The host of the API | `""` |
+| `ingress.hosts` | The hosts of the ingress | `{}` |
+| `ingress.tls` | The TLS settings of the ingress | `{}` |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options.

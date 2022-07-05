@@ -18,6 +18,7 @@ The classification service expects a trained machine learning model in the folde
 | `persistence.accessModes` | The accessModes of the PVC | `{ ReadWriteOnce }` |
 | `ingress.enabled` | Expose the API through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
-| `ingress.host` | The host of the API | `""` |
+| `ingress.hosts` | The hosts of the ingress | `{}` |
+| `ingress.tls` | The TLS settings of the ingress | `{}` |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options.
