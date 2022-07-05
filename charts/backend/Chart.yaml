@@ -2,16 +2,16 @@ apiVersion: v2
 name: backend
 description: The API for the Signals application
 type: application
-version: 2.6.6
+version: 3.0.0
 
 dependencies:
   - name: postgresql
-    version: ~7.7.2
+    version: ~11.6.12
     repository: https://charts.bitnami.com/bitnami
     tags:
       - postgresql
   - name: rabbitmq
-    version: ~6.14.0
+    version: ~9.1.4
     repository: https://charts.bitnami.com/bitnami
     tags:
       - rabbitmq
