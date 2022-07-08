@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: signalen/classification
-  tag: latest
+  tag: ""
   pullPolicy: IfNotPresent
 
 signalsCategoryUrl: https://backend.signalen.demoground.nl/signals/v1/public/terms

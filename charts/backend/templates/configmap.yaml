@@ -25,7 +25,7 @@ data:
   DEFAULT_PDOK_MUNICIPALITIES: {{ .Values.settings.defaultPdokMunicipalities | quote }}
   DWH_MEDIA_ROOT: "/dwh_media"
   DJANGO_LOG_LEVEL: "error"
-  DJANGO_SETTINGS_MODULE: "signals.settings.production"
+  DJANGO_SETTINGS_MODULE: "signals.settings"
   EMAIL_HOST: {{ .Values.settings.email.hostname | quote }}
   EMAIL_PORT: {{ .Values.settings.email.port | quote }}
   EMAIL_HOST_USER: {{ .Values.settings.email.username | quote }}
