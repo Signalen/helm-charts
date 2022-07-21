@@ -12,6 +12,7 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.media.size }}
+  storageClassName: {{ .Values.persistence.media.storageClassName | quote }}
 {{- end }}
 {{- if and .Values.persistence.datawarehouse.enabled (not .Values.persistence.datawarehouse.existingClaim) }}
 ---
@@ -27,4 +28,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.datawarehouse.size }}
+  storageClassName: {{ .Values.persistence.datawarehouse.storageClassName | quote }}
 {{- end }}

@@ -50,6 +50,7 @@ persistence:
   existingClaim: null
   accessModes:
     - ReadWriteOnce
+  storageClassName: ""
 
 resources: {}
 
