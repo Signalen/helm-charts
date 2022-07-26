@@ -16,6 +16,7 @@ The classification service expects a trained machine learning model in the folde
 | `persistence.size` | Specify the size of the PVC | `1Gi` |
 | `persistence.existingClaim` | Name of an existing PVC to use | `null` |
 | `persistence.accessModes` | The accessModes of the PVC | `{ ReadWriteOnce }` |
+| `persistence.storageClassName` | The storageClassName of the PVC | `""` |
 | `ingress.enabled` | Expose the API through an ingress | `true` |
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
 | `ingress.hosts` | The hosts of the ingress | `{}` |

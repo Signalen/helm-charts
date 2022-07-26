@@ -50,12 +50,14 @@ persistence:
     existingClaim: null
     accessModes:
       - ReadWriteOnce
+    storageClassName: ""
   datawarehouse:
     enabled: false
     size: 1Gi
     existingClaim: null
     accessModes:
       - ReadWriteMany
+    storageClassName: ""
 
 existingSecret: null # Refer to existing secret to avoid managing secrets through Helm
 

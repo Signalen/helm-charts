@@ -24,10 +24,12 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `persistence.media.size` | Specify the size of the media PVC | `1Gi` |
 | `persistence.media.existingClaim` | Name of an existing PVC to use | `null` |
 | `persistence.media.accessModes` | The accessModes of media | `{ ReadWriteOnce }` |
+| `persistence.media.storageClassName` | The storageClassName of media | `""` |
 | `persistence.datawarehouse.enabled` | Enable persistence of datawarehouse | `false` |
 | `persistence.datawarehouse.size` | Specify the size of the datawarehouse PVC | `1Gi` |
 | `persistence.datawarehouse.existingClaim` | Name of an existing PVC to use for datawarehouse | `null` |
 | `persistence.datawarehouse.accessModes` | The accessModes of datawarehouse | `{ ReadWriteMany }` |
+| `persistence.datawarehouse.storageClassName` | The storageClassName of datawarehouse | `""` |
 | `existingSecret` | Name of an existing secret to avoid managing secrets through Helm | `null` |
 | `extraVolumes` | Ability to add exta volumes | `[]` |
 | `extraVolumeMounts` | Ability to add exta volume mounts | `[]` |
