@@ -557,6 +557,16 @@ entries:
   classification:
   - apiVersion: v2
     appVersion: 47000c5f9b9a21aec846f3de53108d5df25acd28
+    created: "2022-08-10T13:18:15.530407158Z"
+    description: Machine learning prediction API
+    digest: 55aabdbf47202ffc047f069bc5fdb8c869e15d19d3e28f52b25df404c2517830
+    name: classification
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/classification-4.2.1/classification-4.2.1.tgz
+    version: 4.2.1
+  - apiVersion: v2
+    appVersion: 47000c5f9b9a21aec846f3de53108d5df25acd28
     created: "2022-07-26T11:23:34.189663851Z"
     description: Machine learning prediction API
     digest: b6f4afe1675cb97afdb5c9e38a320374dcb6b52eb09f5918c93a10fa4b130ae3
