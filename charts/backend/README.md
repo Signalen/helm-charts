@@ -62,6 +62,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `settings.systemMailFeedbackReceivedEnabled` | Send email on reception of feedback | `false` |
 | `settings.reporterMailHandledNegativeContactEnabled` | Allow transition VERZOEK_TOT_HEROPENEN to AFGEHANDELD to send a mail to reporter  | `false` |
 | `settings.signalHistoryLogEnabled` | Enable new-style history log | `false` |
+| `settings.showReporterContactDetailsInPdf` | Show reporter contact details in PDF | `true` |
 | `sigmax.enabled` | Enable the connection with Sigmax City Control | `false` |
 | `sigmax.serverUrl` | The server URL of Sigmax | `` |
 | `sigmax.authToken` | The token to authenticate with Sigmax | `` |

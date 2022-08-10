@@ -93,6 +93,7 @@ settings:
   systemMailFeedbackReceivedEnabled: false
   reporterMailHandledNegativeContactEnabled: false
   signalHistoryLogEnabled: false
+  showReporterContactDetailsInPdf: true
 
   database:
     host: signalen-backend-postgresql
