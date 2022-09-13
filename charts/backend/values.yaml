@@ -22,6 +22,11 @@ image:
 
 podAnnotations: {}
 
+podSecurityContext:
+  fsGroup: 999
+
+securityContext: {}
+
 service:
   type: ClusterIP
   port: 80
