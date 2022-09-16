@@ -42,7 +42,7 @@ spec:
             periodSeconds: 10
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           volumeMounts:
             - name: config
