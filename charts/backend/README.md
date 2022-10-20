@@ -21,11 +21,13 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `uwsgi.threads` | The number of uWSGI threads | `2` |
 | `celery.concurrency` | The number of Celery concurrent child processes | `2` |
 | `persistence.media.enabled` | Enable persistence of media | `true` |
+| `persistence.media.enabledOnWorker` | Enable persistence of media on worker | `false` |
 | `persistence.media.size` | Specify the size of the media PVC | `1Gi` |
 | `persistence.media.existingClaim` | Name of an existing PVC to use | `null` |
 | `persistence.media.accessModes` | The accessModes of media | `{ ReadWriteOnce }` |
 | `persistence.media.storageClassName` | The storageClassName of media | `""` |
 | `persistence.datawarehouse.enabled` | Enable persistence of datawarehouse | `false` |
+| `persistence.datawarehouse.enabledOnWorker` | Enable persistence of media on datawarehouse | `true` |
 | `persistence.datawarehouse.size` | Specify the size of the datawarehouse PVC | `1Gi` |
 | `persistence.datawarehouse.existingClaim` | Name of an existing PVC to use for datawarehouse | `null` |
 | `persistence.datawarehouse.accessModes` | The accessModes of datawarehouse | `{ ReadWriteMany }` |
