@@ -32,3 +32,6 @@ ingress:
         - frontend.signals.local
 
 config: {}
+
+extraVolumes: []
+extraVolumeMounts: []
