@@ -20,6 +20,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `uwsgi.processes` | The number of uWSGI processes | `4` |
 | `uwsgi.threads` | The number of uWSGI threads | `2` |
 | `celery.concurrency` | The number of Celery concurrent child processes | `2` |
+| `celery.loglevel` | The loglevel of Celery | `WARNING` |
 | `persistence.media.enabled` | Enable persistence of media | `true` |
 | `persistence.media.enabledOnWorker` | Enable persistence of media on worker | `false` |
 | `persistence.media.size` | Specify the size of the media PVC | `1Gi` |
