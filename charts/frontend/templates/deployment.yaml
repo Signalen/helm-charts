@@ -48,7 +48,13 @@ spec:
             - name: config
               mountPath: /app.json
               subPath: "app.json"
+{{- if ne (len .Values.extraVolumeMounts) 0 }}
+{{ toYaml .Values.extraVolumeMounts | indent 12 }}
+{{- end }}
       volumes:
         - name: config
           configMap:
             name: {{ template "signals-frontend.fullname" . }}
+{{- if ne (len .Values.extraVolumes) 0 }}
+{{ toYaml .Values.extraVolumes | indent 8 }}
+{{- end }}

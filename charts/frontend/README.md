@@ -14,5 +14,7 @@ This Helm chart contains the Signalen web frontend.
 | `ingress.annotations` | Additional annotations on the API ingress | `{}` |
 | `ingress.hosts` | The hosts of the ingress | `{}` |
 | `ingress.tls` | The TLS settings of the ingress | `{}` |
+| `extraVolumes` | Ability to add exta volumes | `[]` |
+| `extraVolumeMounts` | Ability to add exta volume mounts | `[]` |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options.
