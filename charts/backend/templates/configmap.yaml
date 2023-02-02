@@ -40,6 +40,9 @@ data:
   ENVIRONMENT: {{ .Values.settings.environment | quote }}
   FRONTEND_URL: {{ .Values.settings.frontendUrl | quote }}
   JWKS_URL: {{ .Values.settings.jwksUrl | quote }}
+  {{- if .Values.settings.pubJwks }}
+  PUB_JWKS: {{ .Values.settings.pubJwks | quote }}
+  {{- end }}
   ORGANIZATION_NAME: {{ .Values.settings.organizationName | quote }}
   RABBITMQ_HOST: {{ .Values.settings.rabbitmq.host | quote }}
   RABBITMQ_USER: {{ .Values.settings.rabbitmq.username | quote }}

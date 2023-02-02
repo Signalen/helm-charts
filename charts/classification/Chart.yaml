@@ -2,5 +2,5 @@ apiVersion: v2
 name: classification
 description: Machine learning prediction API
 type: application
-version: 4.5.0
+version: 4.5.1
 appVersion: 47000c5f9b9a21aec846f3de53108d5df25acd28
