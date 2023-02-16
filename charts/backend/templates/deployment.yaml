@@ -54,6 +54,8 @@ spec:
           {{- with .Values.envFrom }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          resources:
+          {{- toYaml .Values.resources | nindent 12 }}
       containers:
         - name: api
           securityContext:
@@ -88,6 +90,8 @@ spec:
           {{- with .Values.envFrom }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          resources:
+          {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: media
               mountPath: /media
