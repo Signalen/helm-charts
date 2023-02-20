@@ -49,6 +49,14 @@ ingress:
       hosts:
         - api.signals.local
 
+resources: {}
+
+worker:
+  resources: {}
+
+beat:
+  resources: {}
+
 persistence:
   media:
     enabled: true
