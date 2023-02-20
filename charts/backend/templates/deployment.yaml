@@ -71,8 +71,8 @@ spec:
             - '--buffer-size=8192'
             - '--processes={{ .Values.uwsgi.processes }}'
             - '--threads={{ .Values.uwsgi.threads }}'
-            - '--static-map=/signals/static=/static'
-            - '--static-map=/signals/media=/media'
+            - '--static-map=/signals/static=/app/static'
+            - '--static-map=/signals/media=/app/media'
             - '--die-on-term'
           env:
             {{- range $key, $value := .Values.env }}
@@ -94,7 +94,7 @@ spec:
           {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: media
-              mountPath: /media
+              mountPath: /app/media
             - name: dwh-media
               mountPath: /dwh_media
 {{- if ne (len .Values.extraVolumeMounts) 0 }}

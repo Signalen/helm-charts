@@ -59,7 +59,7 @@ spec:
           {{- toYaml .Values.worker.resources | nindent 12 }}
           volumeMounts:
             - name: media
-              mountPath: /media
+              mountPath: /app/media
             - name: dwh-media
               mountPath: /dwh_media
 {{- if ne (len .Values.extraVolumeMounts) 0 }}
