@@ -53,7 +53,6 @@ data:
   SIGNALS_ML_TOOL_ENDPOINT: {{ .Values.settings.classificationEndpoint | quote }}
   USER_ID_FIELD: {{ .Values.settings.userIdField | quote }}
   USER_ID_FIELDS: {{ .Values.settings.userIdField | quote }}
-  EXCLUDED_PERMISSIONS_IN_RESPONSE: {{ .Values.settings.excludedPermissionsInResponses | nospace | quote }}
   SYSTEM_MAIL_FEEDBACK_RECEIVED_ENABLED: {{ if .Values.settings.systemMailFeedbackReceivedEnabled }}"True"{{ else }}"False"{{ end }}
   REPORTER_MAIL_HANDLED_NEGATIVE_CONTACT_ENABLED: {{ if .Values.settings.reporterMailHandledNegativeContactEnabled }}"True"{{ else }}"False"{{ end }}
   SIGNAL_HISTORY_LOG_ENABLED: {{ if .Values.settings.signalHistoryLogEnabled }}"True"{{ else }}"False"{{ end }}

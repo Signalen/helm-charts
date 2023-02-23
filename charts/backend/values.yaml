@@ -123,12 +123,6 @@ settings:
   apiTransformSourceBasedOnReporterDomainExtensions: "@localhost"
   apiTransformSourceBasedOnReporterExceptions: "ignore@localhost"
 
-  excludedPermissionsInResponses: >-
-    sia_delete_attachment_of_normal_signal,
-    sia_delete_attachment_of_parent_signal,
-    sia_delete_attachment_of_child_signal,
-    sia_delete_attachment_of_other_user
-
   apiPdfLogoStaticFile: api/logo-gemeente-amsterdam.svg
   systemMailFeedbackReceivedEnabled: false
   reporterMailHandledNegativeContactEnabled: false
