@@ -60,7 +60,7 @@ beat:
 persistence:
   media:
     enabled: true
-    enabledOnWorker: false
+    enabledOnWorker: true
     size: 1Gi
     existingClaim: null
     accessModes:
