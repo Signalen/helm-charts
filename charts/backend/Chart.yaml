@@ -17,7 +17,7 @@ dependencies:
     tags:
       - rabbitmq
   - name: elasticsearch
-    version: ~6.8.0
+    version: ~7.17.0
     repository: https://helm.elastic.co
     tags:
       - elasticsearch
