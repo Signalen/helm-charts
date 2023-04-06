@@ -74,6 +74,7 @@ spec:
             - '--static-map=/signals/static=/app/static'
             - '--static-map=/signals/media=/app/media'
             - '--die-on-term'
+            - '--lazy-apps'
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
