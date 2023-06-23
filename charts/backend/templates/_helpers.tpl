@@ -78,3 +78,7 @@ Create the name of the service account to use
 {{- define "signals-backend.celery-beat" -}}
   {{- printf "%s-celery-beat" (include "signals-backend.fullname" .) -}}
 {{- end -}}
+
+{{- define "signals-backend.celery-flower" -}}
+  {{- printf "%s-celery-flower" (include "signals-backend.fullname" .) -}}
+{{- end -}}
