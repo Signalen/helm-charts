@@ -7,12 +7,12 @@ appVersion: 2.19.0
 
 dependencies:
   - name: postgresql
-    version: ~11.6.0
+    version: ~11.9.0
     repository: https://charts.bitnami.com/bitnami
     tags:
       - postgresql
   - name: rabbitmq
-    version: ~10.1.0
+    version: ~12.0.0
     repository: https://charts.bitnami.com/bitnami
     tags:
       - rabbitmq
