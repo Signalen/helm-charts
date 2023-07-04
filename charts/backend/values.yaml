@@ -109,6 +109,10 @@ envVars: []
 #       name: config-map-name
 #       key: config-map-key
 
+tolerations: []
+
+affinity: {}
+
 settings:
   secretKey: "change-to-something-secret"
   allowedHosts: "*"

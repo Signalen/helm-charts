@@ -37,3 +37,7 @@ config: {}
 
 extraVolumes: []
 extraVolumeMounts: []
+
+tolerations: []
+
+affinity: {}
