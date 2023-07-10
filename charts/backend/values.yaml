@@ -57,6 +57,11 @@ worker:
 beat:
   resources: {}
 
+flower:
+  enabled: false
+  basicAuth: signalen:signalen
+  resources: {}
+
 persistence:
   media:
     enabled: true
