@@ -39,6 +39,16 @@ spec:
             - 'worker'
             - '--loglevel={{ .Values.celery.loglevel }}'
             - '--concurrency={{ .Values.celery.concurrency }}'
+          livenessProbe:
+            exec:
+              command: [
+                "bash",
+                "-c",
+                "celery --app=signals inspect ping -d celery@$HOSTNAME"
+              ]
+            initialDelaySeconds: 60
+            periodSeconds: 120
+            timeoutSeconds: 10
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
