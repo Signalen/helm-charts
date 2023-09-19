@@ -109,6 +109,12 @@ envVars: []
 #       name: config-map-name
 #       key: config-map-key
 
+# -- Hook to run one or multiple management commands post-install and post-upgrade.
+managementCommands: ""
+# managementCommands: |
+#   python manage.py elastic_index --init
+#   python manage.py elastic_index --index-all
+
 settings:
   secretKey: "change-to-something-secret"
   allowedHosts: "*"
