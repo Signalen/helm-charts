@@ -40,6 +40,7 @@ The backend Helm chart installs the Signalen API and the by default the followin
 | `envFrom` | Additional environment variables mounted from [secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) or [config maps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables). | `[]` |
 | `env` | Additional environment variables passed directly to containers. | `{}` |
 | `envVars` | Similar to env but with support for all possible configurations. | `[]` |
+| `managementCommands` | Run management commands post-install and post-upgrade | `""` |
 | `settings.secretKey` | The secret key of the backend | `change-to-something-secret` |
 | `settings.allowedHosts` | Restrict the allowed hosts of the API | `*` |
 | `settings.defaultPdokMunicipalities` | A (comma-seperated) list of [PDOK municipalities](https://www.pdok.nl/introductie/-/article/cbs-wijken-en-buurten) the API allows complaints for (e.g. `"Amsterdam,'s-Hertogenbosch"`) | `""` |
