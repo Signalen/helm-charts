@@ -49,6 +49,17 @@ ingress:
       hosts:
         - api.signals.local
 
+probes:
+  backend:
+    livenessProbes:
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 15
+    readinessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 15
+      timeoutSeconds: 15
+
 resources: {}
 
 worker:
