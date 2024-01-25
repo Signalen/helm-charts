@@ -51,7 +51,7 @@ ingress:
 
 probes:
   backend:
-    livenessProbes:
+    livenessProbe:
       initialDelaySeconds: 30
       periodSeconds: 15
       timeoutSeconds: 15
