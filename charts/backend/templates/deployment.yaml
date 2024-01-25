@@ -107,7 +107,7 @@ spec:
             httpGet:
               path: /status/health
               port: http
-            initialDelaySeconds: {{ if .Values.probes.backend.livenessProbe.initialDelaySeconds }}{{ .Values.probes.backend.livenessProbe.initialDelaySeconds }}{{ else }}30{{ end }}
+            initialDelaySeconds: {{ .Values.probes.backend.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ if .Values.probes.backend.livenessProbe.periodSeconds }}{{ .Values.probes.backend.livenessProbe.periodSeconds }}{{ else }}10{{ end }}
             timeoutSeconds: {{ if .Values.probes.backend.livenessProbe.timeoutSeconds }}{{ .Values.probes.backend.livenessProbe.timeoutSeconds }}{{ else }}1{{ end }}
           readinessProbe:
