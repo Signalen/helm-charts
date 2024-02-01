@@ -107,15 +107,15 @@ spec:
               path: /status/health
               port: http
             initialDelaySeconds: {{ .Values.probes.backend.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ if .Values.probes.backend.livenessProbe.periodSeconds }}{{ .Values.probes.backend.livenessProbe.periodSeconds }}{{ else }}10{{ end }}
-            timeoutSeconds: {{ if .Values.probes.backend.livenessProbe.timeoutSeconds }}{{ .Values.probes.backend.livenessProbe.timeoutSeconds }}{{ else }}1{{ end }}
+            periodSeconds: {{ .Values.probes.backend.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.backend.livenessProbe.timeoutSeconds }}
           readinessProbe:
             httpGet:
               path: /status/health
               port: http
-            initialDelaySeconds: {{ if .Values.probes.backend.readinessProbe.initialDelaySeconds }}{{ .Values.probes.backend.readinessProbe.initialDelaySeconds }}{{ else }}1{{ end}}
-            periodSeconds: {{ if .Values.probes.backend.readinessProbe.initialDelaySeconds }}{{ .Values.probes.backend.readinessProbe.periodSeconds }}{{ else }}10{{ end }}
-            timeoutSeconds: {{ if .Values.probes.backend.readinessProbe.timeoutSeconds }}{{ .Values.probes.backend.readinessProbe.timeoutSeconds }}{{ else }}1{{ end }}
+            initialDelaySeconds: {{ .Values.probes.backend.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.backend.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.probes.backend.readinessProbe.timeoutSeconds }}
           ports:
             - name: http
               protocol: TCP
