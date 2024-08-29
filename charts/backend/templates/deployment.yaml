@@ -93,6 +93,11 @@ spec:
           command:
             - /usr/local/bin/uwsgi
           args:
+            {{ if .Values.uwsgi.args }}
+              {{- with .Values.uwsgi.args }}
+                {{- toYaml . | nindent 12 }}
+              {{- end }}
+            {{ else }}
             - '--master'
             - '--http=:8000'
             - '--module=signals.wsgi:application'
@@ -103,6 +108,7 @@ spec:
             - '--static-map=/signals/media=/app/media'
             - '--die-on-term'
             - '--lazy-apps'
+            {{ end }}
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
