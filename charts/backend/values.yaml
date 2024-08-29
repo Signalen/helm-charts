@@ -9,6 +9,7 @@ workerReplicaCount: 1
 uwsgi:
   processes: 4
   threads: 2
+  args: []
 
 celery:
   loglevel: WARNING
