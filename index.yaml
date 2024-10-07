@@ -2,6 +2,32 @@ apiVersion: v1
 entries:
   backend:
   - apiVersion: v2
+    appVersion: 2.37.10
+    created: "2024-10-07T21:50:24.501941152Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - postgresql
+      version: ~11.6.0
+    - name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - rabbitmq
+      version: ~10.1.0
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      tags:
+      - elasticsearch
+      version: ~7.17.0
+    description: The API for the Signals application
+    digest: f2b8ac16672c8e32119f484f52dfc5477d6dc32aedebfc864afa969b28653b34
+    name: backend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/backend-4.17.0/backend-4.17.0.tgz
+    version: 4.17.0
+  - apiVersion: v2
     appVersion: 2.37.7
     created: "2024-08-29T18:04:43.387481406Z"
     dependencies:
@@ -1285,6 +1311,16 @@ entries:
   classification:
   - apiVersion: v2
     appVersion: ad60447d1733473e30ab0a3ba53d58141cc1d250
+    created: "2024-10-07T21:50:24.703056279Z"
+    description: Machine learning prediction API
+    digest: 477f9b914429b7a20f07fe8beaed2b08aa4cd2fb49782c611535c0047b49d3e2
+    name: classification
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/classification-4.17.0/classification-4.17.0.tgz
+    version: 4.17.0
+  - apiVersion: v2
+    appVersion: ad60447d1733473e30ab0a3ba53d58141cc1d250
     created: "2024-08-29T18:04:43.530659719Z"
     description: Machine learning prediction API
     digest: de04f9bfb000e70287a1e0b5fe8ab70269826bd9fed6e53062c7806fff65371d
@@ -1755,6 +1791,16 @@ entries:
     - https://github.com/Signalen/helm-charts/releases/download/classification-2.1.0/classification-2.1.0.tgz
     version: 2.1.0
   frontend:
+  - apiVersion: v2
+    appVersion: 2.24.2
+    created: "2024-10-07T21:50:24.895732585Z"
+    description: The web frontend for the Signals application
+    digest: 71c4253070a0040df5819af793a31ed009e11b90ef5ce458719f1f580c634694
+    name: frontend
+    type: application
+    urls:
+    - https://github.com/Signalen/helm-charts/releases/download/frontend-4.17.0/frontend-4.17.0.tgz
+    version: 4.17.0
   - apiVersion: v2
     appVersion: 2.24.0
     created: "2024-08-29T18:04:43.640233087Z"
