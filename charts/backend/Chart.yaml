@@ -2,8 +2,8 @@ apiVersion: v2
 name: backend
 description: The API for the Signals application
 type: application
-version: 4.17.0
-appVersion: 2.37.10
+version: 4.18.0
+appVersion: 2.37.17
 
 dependencies:
   - name: postgresql
