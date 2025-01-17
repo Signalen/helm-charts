@@ -32,10 +32,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
           args:
+            {{ if .Values.celery.beat.args }}
+              {{- with .Values.celery.beat.args }}
+                {{- toYaml . | nindent 12 }}
+              {{- end }}
+            {{ else }}
             - '--app=signals'
             - 'beat'
             - '--loglevel={{ .Values.celery.loglevel }}'
             - '--pidfile=/tmp/celerybeat.pid'
+            {{ end }}
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}

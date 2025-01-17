@@ -35,10 +35,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/usr/local/bin/celery"]
           args:
+            {{ if .Values.celery.worker.args }}
+              {{- with .Values.celery.worker.args }}
+                {{- toYaml . | nindent 12 }}
+              {{- end }}
+            {{ else }}
             - '--app=signals'
             - 'worker'
             - '--loglevel={{ .Values.celery.loglevel }}'
             - '--concurrency={{ .Values.celery.concurrency }}'
+            {{ end }}
           livenessProbe:
             exec:
               command: [
