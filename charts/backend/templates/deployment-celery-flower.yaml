@@ -63,13 +63,13 @@ spec:
               mountPath: /app/media
             - name: dwh-media
               mountPath: /dwh_media
+{{- if ne (len .Values.extraVolumeMounts) 0 }}
+{{ toYaml .Values.extraVolumeMounts | indent 12 }}
+{{- end }}
           ports:
             - name: http
               protocol: TCP
               containerPort: 8000
-{{- if ne (len .Values.extraVolumeMounts) 0 }}
-{{ toYaml .Values.extraVolumeMounts | indent 12 }}
-{{- end }}
       volumes:
         - name: media
         {{- if and .Values.persistence.media.enabled .Values.persistence.media.enabledOnflower }}
