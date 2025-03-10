@@ -252,3 +252,13 @@ elasticsearch:
     limits:
       cpu: "500m"
       memory: "1Gi"
+
+extraVolumes:
+  - name: tmp
+    emptyDir:
+      medium: "Memory"
+
+extraVolumeMounts:
+  - name: tmp
+    mountPath: /tmp
+
