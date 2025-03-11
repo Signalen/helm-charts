@@ -60,12 +60,5 @@ tolerations: []
 
 affinity: {}
 
-extraVolumes:
-  - name: tmp
-    emptyDir:
-      medium: "Memory"
-    
-extraVolumeMounts:
-  - name: tmp
-    mountPath: /tmp
-
+extraVolumes: []
+extraVolumeMounts: []
