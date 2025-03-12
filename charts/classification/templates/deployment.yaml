@@ -45,6 +45,10 @@ spec:
           volumeMounts:
             - name: models
               mountPath: /models
+{{- if ne (len .Values.extraVolumeMounts) 0 }}
+{{ toYaml .Values.extraVolumeMounts | indent 12 }}
+{{- end }}
+f
       volumes:
         - name: models
         {{- if .Values.persistence.enabled }}
@@ -53,6 +57,9 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
+{{- if ne (len .Values.extraVolumes) 0 }}
+{{ toYaml .Values.extraVolumes | indent 8 }}
+{{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
