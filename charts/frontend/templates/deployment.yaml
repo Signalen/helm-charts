@@ -53,6 +53,10 @@ spec:
 {{- if ne (len .Values.extraVolumeMounts) 0 }}
 {{ toYaml .Values.extraVolumeMounts | indent 12 }}
 {{- end }}
+{{- if ne (len .Values.initContainers) 0 }}
+      initContainers:
+{{ toYaml .Values.initContainers | indent 8 }}
+{{- end }}
       volumes:
         - name: config
           configMap:
