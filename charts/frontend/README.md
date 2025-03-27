@@ -16,5 +16,8 @@ This Helm chart contains the Signalen web frontend.
 | `ingress.tls` | The TLS settings of the ingress | `{}` |
 | `extraVolumes` | Ability to add exta volumes | `[]` |
 | `extraVolumeMounts` | Ability to add exta volume mounts | `[]` |
+| `initContainers` | Ability to add initContainers | `[]` |
+| `command` | Override default startup command of the main container | |
+| `arguments` | Override default startup arguments of the main container | |
 
 Check [values.yaml](./values.yaml) for all the possible configuration options.

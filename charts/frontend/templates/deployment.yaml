@@ -28,6 +28,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if ne (len .Values.command) 0 }}
+          command: {{ toYaml .Values.command | nindent 12 }}
+          {{- end }}
+          {{- if ne (len .Values.args) 0 }}
+          args: {{ toYaml .Values.args | nindent 12 }}
+          {{- end  }}
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
           livenessProbe:
@@ -52,6 +58,10 @@ spec:
               subPath: "app.json"
 {{- if ne (len .Values.extraVolumeMounts) 0 }}
 {{ toYaml .Values.extraVolumeMounts | indent 12 }}
+{{- end }}
+{{- if ne (len .Values.initContainers) 0 }}
+      initContainers:
+{{ toYaml .Values.initContainers | indent 8 }}
 {{- end }}
       volumes:
         - name: config
