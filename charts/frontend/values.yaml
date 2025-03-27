@@ -39,3 +39,6 @@ extraVolumes: []
 extraVolumeMounts: []
 
 initContainers: []
+
+command: []
+args: []
