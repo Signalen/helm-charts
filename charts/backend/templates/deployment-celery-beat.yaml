@@ -61,12 +61,12 @@ spec:
           resources:
           {{- toYaml .Values.beat.resources | nindent 12 }}
 
-{{- if ne (len .Values.extraVolumeMounts) 0 }} 
+          {{- if ne (len .Values.extraVolumeMounts) 0 }} 
           volumeMounts:
-{{ toYaml .Values.extraVolumeMounts | indent 12 }}
-{{- end }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
 
-{{- if ne (len .Values.extraVolumes) 0 }}
+      {{- if ne (len .Values.extraVolumes) 0 }}
       volumes:
-{{ toYaml .Values.extraVolumes | indent 8 }}
-{{- end }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+      {{- end }}
