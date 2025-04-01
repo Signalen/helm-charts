@@ -56,6 +56,10 @@ spec:
           {{- end }}
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
+          {{- if ne (len .Values.extraVolumeMounts) 0 }}
+          volumeMounts:
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
         - name: create-cache-table
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
@@ -84,6 +88,10 @@ spec:
           {{- end }}
           resources:
           {{- toYaml .Values.resources | nindent 12 }}
+          {{- if ne (len .Values.extraVolumeMounts) 0 }}
+          volumeMounts:
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
       containers:
         - name: api
           securityContext:
@@ -132,9 +140,9 @@ spec:
               mountPath: /app/media
             - name: dwh-media
               mountPath: /dwh_media
-{{- if ne (len .Values.extraVolumeMounts) 0 }}
-{{ toYaml .Values.extraVolumeMounts | indent 12 }}
-{{- end }}
+            {{- if ne (len .Values.extraVolumeMounts) 0 }}
+              {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
 
           livenessProbe:
             httpGet:
@@ -169,6 +177,6 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
-{{- if ne (len .Values.extraVolumes) 0 }}
-{{ toYaml .Values.extraVolumes | indent 8 }}
-{{- end }}
+        {{- if ne (len .Values.extraVolumes) 0 }}
+          {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
