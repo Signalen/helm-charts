@@ -125,6 +125,10 @@ envVars: []
 #       name: config-map-name
 #       key: config-map-key
 
+tolerations: []
+
+affinity: {}
+
 # -- Hook to run one or multiple management commands post-install and post-upgrade.
 managementCommands: ""
 # managementCommands: |
