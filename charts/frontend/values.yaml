@@ -42,3 +42,7 @@ initContainers: []
 
 command: []
 args: []
+
+tolerations: []
+
+affinity: {}
