@@ -2,7 +2,7 @@ apiVersion: v2
 name: backend
 description: The API for the Signals application
 type: application
-version: 4.20.2
+version: 4.20.3
 appVersion: 2.43.8
 
 dependencies:
