@@ -213,6 +213,9 @@ settings:
 ## PostgreSQL subchart ##
 #########################
 postgresql:
+  image:
+    repository: bitnamilegacy/postgresql
+
   auth:
     postgresPassword: signalen
     database: signalen
@@ -227,6 +230,9 @@ postgresql:
 ## RabbitMQ subchart ##
 #######################
 rabbitmq:
+  image:
+    repository: bitnamilegacy/rabbitmq
+
   auth:
     username: signalen
     password: signalen
